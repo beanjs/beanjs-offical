@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  beanjs-website:
+    container_name: beanjs-websited
+    image: docker.beanjs.com/beanjs-website
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+      - "traefik.backend=beanjs_website_backend"
+      - "traefik.frontend.rule=Host:www.beanjs.com"
+      # - "traefik.frontend.auth.basic= beanjs:$$apr1$$T6I29WwA$$kYSCFTjjjwMLGX3GEsMsz0"
+    networks:
+      - beanjs-net
+
+networks:
+  beanjs-net:
+    external: true
