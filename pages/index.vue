@@ -74,7 +74,7 @@
               再确定要走自己研发产品这条路以后，那这个产品的定位与特色就是首要考虑的事情了。使用微信小程序作为入口就能容易的解决
               <strong>APP下载</strong>
               、
-              <strong>账号的注册</strong>
+              <strong>账号注册</strong>
               、
               <strong>定制化界面</strong>
               等用户层面临的问题了。但是对于硬件层的
@@ -140,6 +140,16 @@
         </div>
       </div>
     </i-hero>
+    <i-hero title="使用案例">
+      <div class="usage-wrapper">
+        <div class="usage-container">
+          <img src="/beanio/images/sonoff-00.png" alt="" />
+        </div>
+        <div class="usage-container">
+          <img src="/beanio/images/sonoff-01.png" alt="" />
+        </div>
+      </div>
+    </i-hero>
   </div>
 </template>
 <script setup lang="ts">
@@ -152,7 +162,7 @@ useHead({
 .index-wrapper {
   @apply h-full;
   .banner-wrapper {
-    background-image: url('/01.jpg');
+    background-image: url('/beanio/images/banner.jpg');
     @apply bg-center flex flex-col items-center select-none pt-28 pb-12 mb-4;
     @apply lg:pt-40 lg:pb-36 lg:mb-8;
 
@@ -179,6 +189,7 @@ useHead({
           @apply w-full mx-8 my-4 px-16 py-4;
           @apply text-center text-gray-800 bg-white rounded-full border border-white transition-all cursor-pointer;
           @apply lg:w-auto lg:my-16 lg:hover:bg-gray-800 lg:hover:text-white lg:duration-300 active:bg-gray-100;
+          @apply lg:transition-all lg:duration-300 lg:hover:scale-105 lg:hover:shadow;
         }
       }
     }
@@ -218,6 +229,17 @@ useHead({
         a {
           @apply text-blue-500;
         }
+      }
+    }
+  }
+
+  .usage-wrapper {
+    @apply flex flex-row justify-center;
+    // @apply ;
+    .usage-container {
+      @apply px-2 py-2;
+      img{
+        @apply rounded-xl h-72;
       }
     }
   }

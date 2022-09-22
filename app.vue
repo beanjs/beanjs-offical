@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper scroll-smooth">
     <nuxt-layout class="app-container" />
   </div>
 </template>

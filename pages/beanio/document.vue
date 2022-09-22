@@ -22,7 +22,8 @@
         class="category-container"
         @click="onQuery(c.query)"
       >
-        {{ c.label }}
+        <icon :icon="icons[c.query.category as string]"></icon>
+        <span>{{ c.label }}</span>
       </div>
     </div>
     <div class="content-wrapper">
@@ -140,8 +141,11 @@ onMounted(async () => {
     @apply flex flex-row justify-center py-8 select-none;
     @apply lg:px-[10%];
     .category-container {
-      @apply mx-2 px-4 py-1 bg-white text-sm rounded-full cursor-pointer;
+      @apply mx-2 px-4 py-1 bg-white text-sm rounded-full cursor-pointer flex flex-row items-center;
       @apply hover:shadow active:bg-gray-100;
+      span{
+        @apply pl-1;
+      }
     }
   }
 
