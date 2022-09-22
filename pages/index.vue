@@ -234,8 +234,8 @@ useHead({
   }
 
   .usage-wrapper {
-    @apply flex flex-row justify-center;
-    // @apply ;
+    @apply flex flex-col justify-center;
+    @apply lg:flex-row;
     .usage-container {
       @apply px-2 py-2;
       img{
