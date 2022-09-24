@@ -38,5 +38,6 @@ steps:
         from_secret: beanjs_password
       script:
         - cd /home/beanjs-website
+        - docker pull docker.beanjs.com/beanjs-website:latest
         - docker-compose down --rmi all
         - docker-compose up -d
