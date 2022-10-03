@@ -83,7 +83,7 @@ beanio.on('message',(subject,payload)=>{})
 
 ### beanio.setup(options)
 
-::i-chinese{sha="5b1b4a694b4babf691930bc0d2fcfc30c2bff8823401bbac4cb57e4cb1aafa21"}
+::i-chinese{sha="ba8e834e20133d790e0f2a946c626472440f2bad050fc73d9503435456c0aa91"}
 ::
 setup beanio options
 
@@ -93,7 +93,6 @@ var beanio=require("beanio")
 function onInit(){
   beanio.setup({
     "token":"<string>",
-    "pwmFreq":"<number,minimum:1000>",
     "subjects":"<string array>",
     "wifi":{
       "ssid":"<string>",
