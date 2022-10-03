@@ -18,6 +18,7 @@
         <div class="footer-content">
           <ul>
             <li>北京联盛德微电子有限责任公司</li>
+            <li>河北骑士智能科技有限公司</li>
           </ul>
         </div>
       </div>
