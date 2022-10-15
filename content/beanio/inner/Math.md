@@ -4,7 +4,7 @@ category: 'inner'
 tags: [object]
 ---
 
-<!--28--> 
+<!--29--> 
 
 ### Math.E
 
@@ -92,9 +92,10 @@ x, rounded upwards to the nearest integer
 
 ### Math.clip(x,min,max)
 
-::i-chinese{sha="da387684187522881f3c963997fb94f6d4fa9b4296c9a6240e02dc8cf2f88143"}
+::i-chinese{sha="92eca98ab2d717520dc69a8749ffc415ad18f0d21304260c13dadf1e05f27b28"}
 ::
-DEPRECATED - Please use `E.clip()` instead. Clip a number to be between min and max (inclusive)
+DEPRECATED - Please use `E.clip()` instead. Clip a number to be between min and
+max (inclusive)
 
 ### Math.cos(theta)
 
@@ -150,6 +151,12 @@ A random number between 0 and 1
 ::
 x, rounded to the nearest integer
 
+### Math.sign(x)
+
+::i-chinese{sha="24ed67ceb582f2a412846dbc32fbc448aa54403edffa12a20cd2b502f4375882"}
+::
+sign on x - -1, 1, or 0
+
 ### Math.sin(theta)
 
 ::i-chinese{sha="7b4c2f670fc87ba6bf5a7122c9f2d610217fc227ea3106ce095ee7b848300412"}
@@ -170,8 +177,12 @@ The tangent of theta
 
 ### Math.wrap(x,max)
 
-::i-chinese{sha="c0d4fc18be1837fb83be6010d2cbd2b167ff29b104e22a6d48cb77de52e7c875"}
+::i-chinese{sha="6d9ccd9670e9ebfbbe10223c1858b85b0c0bb0325d45693632ed4cc1d13545a8"}
 ::
 DEPRECATED - This is not part of standard JavaScript libraries
 
-Wrap a number around if it is less than 0 or greater than or equal to max. For instance you might do: `Math.wrap(angleInDegrees, 360)`
+Wrap a number around if it is less than 0 or greater than or equal to max. For
+instance you might do: 
+```javascript
+Math.wrap(angleInDegrees, 360)
+```

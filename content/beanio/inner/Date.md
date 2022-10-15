@@ -17,9 +17,10 @@ Creates a date object
 
 ### Date.now()
 
-::i-chinese{sha="a0037d6bc4c60df31f035b7572663c4fef7400dcbcf1c0a48c6ce866e7c938f4"}
+::i-chinese{sha="1b56b1fc48b9ea65de5f3e63289ad8dd6095aaae812136fa470ec0df94589a77"}
 ::
-Get the number of milliseconds elapsed since 1970 (or on embedded platforms, since startup)
+Get the number of milliseconds elapsed since 1970 (or on embedded platforms,
+since startup)
 
 ### Date.parse(str)
 
@@ -27,7 +28,7 @@ Get the number of milliseconds elapsed since 1970 (or on embedded platforms, sin
 ::
 Parse a date string and return milliseconds since 1970. Data can be either `2011-10-20T14:48:00`, `2011-10-20` or `Mon, 25 Dec 1995 13:30:00 +0430`
 
-<!--23--> 
+<!--25--> 
 
 ### Date.prototype.getDate()
 
@@ -43,15 +44,21 @@ Day of the week (0=sunday, 1=monday, etc)
 
 ### Date.prototype.getFullYear()
 
-::i-chinese{sha="b54b16039547aa1802f3b91b61b192bb6f3cdae150b93fd173a077df95b34630"}
+::i-chinese{sha="4d11955e16ba6e5ac95a2be30cbdc0a309b8a36e49e1fc9d869a6067ab42193e"}
 ::
-The year, eg. 2014
+The year, e.g. 2014
 
 ### Date.prototype.getHours()
 
 ::i-chinese{sha="eae9d96274bd1cdce4b80d1981a475ae416acea5d87425354d036b79a6abd539"}
 ::
 0..23
+
+### Date.prototype.getIsDST()
+
+::i-chinese{sha="b4141219da9a4c66cacc291d7bcb5a240081f7e8429209e51d96e7b8a604c470"}
+::
+This returns a boolean indicating whether daylight savings time is in effect.
 
 ### Date.prototype.getMilliseconds()
 
@@ -97,7 +104,7 @@ has nothing to do with the instance of `Date` that it is called on.
 ::
 Day of the month 1..31
 
-### Date.prototype.setFullYear(yearValue,yearValue,dayValue)
+### Date.prototype.setFullYear(yearValue,monthValue,dayValue)
 
 ::i-chinese{sha="6fe67268bd196581bf1345454e513f0b3ac92f18ca9892c5b685c5402631b035"}
 ::
@@ -141,9 +148,9 @@ Set the time/date of this Date class
 
 ### Date.prototype.toISOString()
 
-::i-chinese{sha="c0588a23f34dad68677049a00f50729e8504b178e718008721aa7330fab62b32"}
+::i-chinese{sha="52c69d38447e3c022cb6153832b6d79e7b90e62958a7423829a3444c3744c263"}
 ::
-Converts to a ISO 8601 String, eg: `2014-06-20T14:52:20.123Z`
+Converts to a ISO 8601 String, e.g: `2014-06-20T14:52:20.123Z`
 
 >**Note:** This always assumes a timezone of GMT
 
@@ -153,19 +160,26 @@ Converts to a ISO 8601 String, eg: `2014-06-20T14:52:20.123Z`
 ::
 Calls `Date.toISOString` to output this date to JSON
 
+### Date.prototype.toLocalISOString()
+
+::i-chinese{sha="068aac43c4bc9267ab172d4df8288938dcb0f6190fac7fe445c8277774ccccc9"}
+::
+Converts to a ISO 8601 String (with timezone information), e.g:
+`2014-06-20T14:52:20.123-0500`
+
 ### Date.prototype.toString()
 
-::i-chinese{sha="7106989c6a9e445e5f7e217a79190aa0a4f909fac1491b3182b7ccd24aeae604"}
+::i-chinese{sha="1e77c026e2978eacb58960fbf86f649a67a6da7d535d00c7649190cb5e284959"}
 ::
-Converts to a String, eg: `Fri Jun 20 2014 14:52:20 GMT+0000`
+Converts to a String, e.g: `Fri Jun 20 2014 14:52:20 GMT+0000`
 
-> **Note:** This uses whatever timezone was set with `E.setTimeZone()`
+> **Note:** This uses whatever timezone was set with `E.setTimeZone()` or `E.setDST()`
 
 ### Date.prototype.toUTCString()
 
-::i-chinese{sha="b3692264351d6eae80fff72133866a567cafb35e5ea97fd818825f87785daf83"}
+::i-chinese{sha="9e49dc9fe0176020c0dc321340c1e2c0654c9af32203daf3e3bd0bea21aa3201"}
 ::
-Converts to a String, eg: `Fri, 20 Jun 2014 14:52:20 GMT`
+Converts to a String, e.g: `Fri, 20 Jun 2014 14:52:20 GMT`
 
 > **Note:** This always assumes a timezone of GMT
 

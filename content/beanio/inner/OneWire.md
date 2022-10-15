@@ -13,7 +13,7 @@ tags: [object]
 ::
 Create a software OneWire implementation on the given pin
 
-<!--7--> 
+<!--6--> 
 
 ### OneWire.prototype.read(count)
 
@@ -26,12 +26,6 @@ Read a byte
 ::i-chinese{sha="a8d9352157b0d3be7eb36df34e7868c6fd4810bb83ba58ee3eca6d8ae372dc00"}
 ::
 Perform a reset cycle
-
-### OneWire.prototype.search()
-
-::i-chinese{sha="6eb27d1a752cc4f9b7d6804fcb55c016abd9dac90dba637248e15fb23fd90e80"}
-::
-Search for devices
 
 ### OneWire.prototype.search(command)
 

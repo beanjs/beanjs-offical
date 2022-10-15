@@ -4,41 +4,44 @@ category: 'inner'
 tags: [object]
 ---
 
-<!--41--> 
+<!--44--> 
 
 ### E.CRC32(data)
 
-::i-chinese{sha="5999ddd22053c00487dfa95e09a12e195159fc76d23bce02ca2475dbfe1a072d"}
+::i-chinese{sha="36b2135d6314ccab07c06a3dec968635d05fe5d31643e32e18e96f0844317bf9"}
 ::
-Perform a standard 32 bit CRC (Cyclic redundancy check) on the supplied data (one byte at a time)
-and return the result as an unsigned integer.
+Perform a standard 32 bit CRC (Cyclic redundancy check) on the supplied data
+(one byte at a time) and return the result as an unsigned integer.
 
 ### E.FFT(arrReal,arrImage,inverse)
 
-::i-chinese{sha="20c2d919068a7093030bcf6e33ef05f88e5f096664586bce7464902de2890439"}
+::i-chinese{sha="bbb49cd4c77e4797398ff9f5e7e66ef0618816893f9829110dae6e9f15ee5ce7"}
 ::
-Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data and writes it back into the
-original arrays. Note that if only one array is supplied, the data written back is the modulus of the complex
-result `sqrt(r*r+i*i)`.
+Performs a Fast Fourier Transform (FFT) in 32 bit floats on the supplied data
+and writes it back into the original arrays. Note that if only one array is
+supplied, the data written back is the modulus of the complex result
+`sqrt(r*r+i*i)`.
 
-In order to perform the FFT, there has to be enough room on the stack to allocate two arrays of 32 bit
-floating point numbers - this will limit the maximum size of FFT possible to around 1024 items on
-most platforms.
+In order to perform the FFT, there has to be enough room on the stack to
+allocate two arrays of 32 bit floating point numbers - this will limit the
+maximum size of FFT possible to around 1024 items on most platforms.
 
 > **Note:** on the Original Espruino board, FFTs are performed in 64bit arithmetic as there isn't
 space to include the 32 bit maths routines (2x more RAM is required).
 
 ### E.HSBtoRGB(hue,sat,bri,asArray)
 
-::i-chinese{sha="4b8b9011e257f8d30e51898c193edfbdaf341ab39c43915e19029a583cb2a016"}
+::i-chinese{sha="b02ff896695e0b5067ed41c5891fee8b4bc124c2df49efa49ea7a18d3da8c1cc"}
 ::
-Convert hue, saturation and brightness to red, green and blue (packed into an integer if `asArray==false` or an array if `asArray==true`).
+Convert hue, saturation and brightness to red, green and blue (packed into an
+integer if `asArray==false` or an array if `asArray==true`).
 
-This replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices with 24 bit colour it can
-be used as: `Graphics.setColor(E.HSBtoRGB(h, s, b))`
+This replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices
+with 24 bit colour it can be used as: `Graphics.setColor(E.HSBtoRGB(h, s, b))`
 
-You can quickly set RGB items in an Array or Typed Array using `array.set(E.HSBtoRGB(h, s, b,true), offset)`,
-which can be useful with arrays used with `require("neopixel").write`.
+You can quickly set RGB items in an Array or Typed Array using
+`array.set(E.HSBtoRGB(h, s, b,true), offset)`, which can be useful with arrays
+used with `require("neopixel").write`.
 
 ### E.clip(x,min,max)
 
@@ -58,19 +61,61 @@ for (i in arr1){
 }
 ```
 
+### E.decodeUTF8(str,lookup,replaceFn)
+
+::i-chinese{sha="ca958b6ae1532071655a1acbe45a09669598f9b3aa5490e3970a28a8b4a804e4"}
+::
+Decode a UTF8 string.
+
+* Any decoded character less than 256 gets passed straight through
+* Otherwise if `lookup` is an array and an item with that char code exists in `lookup` then that is used
+* Otherwise if `lookup` is an object and an item with that char code (as lowercase hex) exists in `lookup` then that is used
+* Otherwise `replaceFn(charCode)` is called and the result used if `replaceFn` is a function
+* If `replaceFn` is a string, that is used
+* Or finally if nothing else matches, the character is ignored
+
+For instance:
+
+```
+let unicodeRemap = {
+  0x20ac:"\u0080", // Euro symbol
+  0x2026:"\u0085", // Ellipsis
+};
+E.decodeUTF8("UTF-8 Euro: \u00e2\u0082\u00ac", unicodeRemap, '[?]') == "UTF-8 Euro: \u0080"
+```
+
 ### E.defrag()
 
 ::i-chinese{sha="1874bae5fefdcc131696e25c7642d0c5c70c84f4c4b932ee185122e6336af63c"}
 ::
 BETA: defragment memory!
 
+### E.dumpFragmentation()
+
+::i-chinese{sha="876f5c029ab62f4e8728a1edda3d68325fdec39d5074b68d70f42d747bf41079"}
+::
+Show fragmentation.
+
+* ` ` is free space
+* `#` is a normal variable
+* `L` is a locked variable (address used, cannot be moved)
+* `=` represents data in a Flat String (must be contiguous)
+
+### E.dumpTimers()
+
+::i-chinese{sha="7ab8a960cdab5d228a4a063572113f63d70a7448c08509860a29fac60ea43a11"}
+::
+Output the current list of Utility Timer Tasks - for debugging only
+
 ### E.enableWatchdog(timeout,isAuto)
 
-::i-chinese{sha="894df21825e89000bb8d655364c112e96d572dcbd27799bd1c2a57c3acbe0123"}
+::i-chinese{sha="b4639a018563e6dd168b009519bfde2bd704a19ec98cfea399432cc038f140a9"}
 ::
-Enable the watchdog timer. This will reset Espruino if it isn't able to return to the idle loop within the timeout.
+Enable the watchdog timer. This will reset Espruino if it isn't able to return
+to the idle loop within the timeout.
 
-If `isAuto` is false, you must call `E.kickWatchdog()` yourself every so often or the chip will reset.
+If `isAuto` is false, you must call `E.kickWatchdog()` yourself every so often
+or the chip will reset.
 
 ```javascript
 E.enableWatchdog(0.5); // automatic mode                                                        
@@ -94,42 +139,42 @@ the board will reboot. You can do this with `setInterval("", time_in_millisecond
 
 ### E.on("errorFlag",listener)
 
-::i-chinese{sha="8431b287f7c0b02bf7129fbe0f9972660c3c4749532950f029d25d5e30d68464"}
+::i-chinese{sha="636fc5f8bd186640702e551550d7131757aa85541676cf3986897f31489a78ba"}
 ::
-This event is called when an error is created by Espruino itself (rather
-than JS code) which changes the state of the error flags reported by
-`E.getErrorFlags()`
+This event is called when an error is created by Espruino itself (rather than JS
+code) which changes the state of the error flags reported by `E.getErrorFlags()`
 
 This could be low memory, full buffers, UART overflow, etc. `E.getErrorFlags()`
 has a full description of each type of error.
 
-This event will only be emitted when error flag is set. If the error
-flag was already set nothing will be emitted. To clear error flags
-so that you do get a callback each time a flag is set, call `E.getErrorFlags()`.
+This event will only be emitted when error flag is set. If the error flag was
+already set nothing will be emitted. To clear error flags so that you do get a
+callback each time a flag is set, call `E.getErrorFlags()`.
 
 ### E.getAddressOf(v,flatAddress)
 
-::i-chinese{sha="c6f2d39684952ee2911d04c091d77dfdd4dd3f503a024d2e410e8e4b1e3ac730"}
+::i-chinese{sha="535cc88ae96ddeeeb9501e9c5766a0a95dba423c47daff593db2e688639fb1ed"}
 ::
-Return the address in memory of the given variable. This can then
-be used with `peek` and `poke` functions. However, changing data in
-JS variables directly (flatAddress=false) will most likely result in a crash.
+Return the address in memory of the given variable. This can then be used with
+`peek` and `poke` functions. However, changing data in JS variables directly
+(flatAddress=false) will most likely result in a crash.
 
-This functions exists to allow embedded targets to set up
-peripherals such as DMA so that they write directly to
-JS variables.
+This functions exists to allow embedded targets to set up peripherals such as
+DMA so that they write directly to JS variables.
 
 ### E.getAnalogVRef()
 
-::i-chinese{sha="bc0411a88662bf4cc6de146db8c7f08b72c3dc5c631692bb7bf463ccaa508e57"}
+::i-chinese{sha="41741af79bbb762925855e5713818a044279eacb196f8bb726e9176896a8f010"}
 ::
-Check the internal voltage reference. To work out an actual voltage of an input pin, you can use `analogRead(pin)*E.getAnalogVRef()`
+Check the internal voltage reference. To work out an actual voltage of an input
+pin, you can use `analogRead(pin)*E.getAnalogVRef()`
 
 > **Note:** This value is calculated by reading the voltage on an internal voltage reference with the ADC.
 It will be slightly noisy, so if you need this for accurate measurements we'd recommend that you call
 this function several times and average the results.
 
-While this is implemented on Espruino boards, it may not be implemented on other devices. If so it'll return NaN.
+While this is implemented on Espruino boards, it may not be implemented on other
+devices. If so it'll return NaN.
 
 ### E.getConsole()
 
@@ -139,44 +184,55 @@ Returns the current console device - see `E.setConsole` for more information.
 
 ### E.getErrorFlags()
 
-::i-chinese{sha="0f97c773e98ff1a94b3c5b206b0c648e74fff6409f341222603bcb38311b8d26"}
+::i-chinese{sha="cb2c8af46e8b37a7a1db44396ca7376f795b9c485f09e08b35572665ff5a8b70"}
 ::
 Get and reset the error flags. Returns an array that can contain:
 
-`'FIFO_FULL'`: The receive FIFO filled up and data was lost. This could be state transitions for setWatch, or received characters.
+`'FIFO_FULL'`: The receive FIFO filled up and data was lost. This could be state
+transitions for setWatch, or received characters.
 
-`'BUFFER_FULL'`: A buffer for a stream filled up and characters were lost. This can happen to any stream - Serial,HTTP,etc.
+`'BUFFER_FULL'`: A buffer for a stream filled up and characters were lost. This
+can happen to any stream - Serial,HTTP,etc.
 
-`'CALLBACK'`: A callback (`setWatch`, `setInterval`, `on('data',...)`) caused an error and so was removed.
+`'CALLBACK'`: A callback (`setWatch`, `setInterval`, `on('data',...)`) caused an
+error and so was removed.
 
-`'LOW_MEMORY'`: Memory is running low - Espruino had to run a garbage collection pass or remove some of the command history
+`'LOW_MEMORY'`: Memory is running low - Espruino had to run a garbage collection
+pass or remove some of the command history
 
-`'MEMORY'`: Espruino ran out of memory and was unable to allocate some data that it needed.
+`'MEMORY'`: Espruino ran out of memory and was unable to allocate some data that
+it needed.
 
-`'UART_OVERFLOW'` : A UART received data but it was not read in time and was lost
+`'UART_OVERFLOW'` : A UART received data but it was not read in time and was
+lost
 
 ### E.getFlags()
 
-::i-chinese{sha="f53dd89f660c8358a6cf5d858c9d66f43b9d3a28bd2bdb15c17d12d92e549214"}
+::i-chinese{sha="e6929605b1c789f619335e97849807e9afaa72361cc6f8b4889b10e1f9b5663d"}
 ::
-Get Espruino's interpreter flags that control the way it handles your JavaScript code.
+Get Espruino's interpreter flags that control the way it handles your JavaScript
+code.
 
 * `deepSleep` - Allow deep sleep modes (also set by setDeepSleep)
-* `pretokenise` - When adding functions, pre-minify them and tokenise reserved words
-* `unsafeFlash` - Some platforms stop writes/erases to interpreter memory to stop you bricking the device accidentally - this removes that protection
-* `unsyncFiles` - When writing files, *don't* flush all data to the SD card after each command (the default is *to* flush). This is much faster, but can cause filesystem damage if power is lost without the filesystem unmounted.
+* `pretokenise` - When adding functions, pre-minify them and tokenise reserved
+  words
+* `unsafeFlash` - Some platforms stop writes/erases to interpreter memory to
+  stop you bricking the device accidentally - this removes that protection
+* `unsyncFiles` - When writing files, *don't* flush all data to the SD card
+  after each command (the default is *to* flush). This is much faster, but can
+  cause filesystem damage if power is lost without the filesystem unmounted.
 
 ### E.getSizeOf(v,depth)
 
-::i-chinese{sha="7aa3763ef34c6253a588cdbfc4758d109d0bd1ec894ae897370f2d19c109ca4f"}
+::i-chinese{sha="b8bd59b0a7ca4b6541b611a4cbebe3853ce77e59a3691a60055db5628256df12"}
 ::
 Return the number of variable blocks used by the supplied variable. This is
-useful if you're running out of memory and you want to be able to see what
-is taking up most of the available space.
+useful if you're running out of memory and you want to be able to see what is
+taking up most of the available space.
 
-If `depth>0` and the variable can be recursed into, an array listing all property
-names (including internal Espruino names) and their sizes is returned. If
-`depth>1` there is also a `more` field that inspects the objects's children's
+If `depth>0` and the variable can be recursed into, an array listing all
+property names (including internal Espruino names) and their sizes is returned.
+If `depth>1` there is also a `more` field that inspects the objects' children's
 children.
 
 For instance `E.getSizeOf(function(a,b) { })` returns `5`.
@@ -197,23 +253,33 @@ But `E.getSizeOf(function(a,b) { }, 1)` returns:
  ]
 ```
 
-In this case setting depth to `2` will make no difference as there are
-no more children to traverse.
+In this case setting depth to `2` will make no difference as there are no more
+children to traverse.
 
 ### E.getTemperature()
 
-::i-chinese{sha="8b4222cdfb5f03c9eec836c9e964dd8c49f51b5c00073bb7d0840dececbf406a"}
+::i-chinese{sha="5d12a2d975e36c840c84050d7bce185ffe6576bb49564c74df01ff45259d948b"}
 ::
 Use the microcontroller's internal thermistor to work out the temperature.
 
+On Puck.js v2.0 this will use the on-board PCT2075TP temperature sensor, but on
+other devices it may not be desperately well calibrated.
+
+While this is implemented on Espruino boards, it may not be implemented on other
+devices. If so it'll return NaN.
+
+> **Note:** This is not entirely accurate and varies by a few degrees from chip
+ to chip. It measures the `die temperature`, so when connected to USB it could
+ be reading 10 over degrees C above ambient temperature. When running from
+ battery with `setDeepSleep(true)` it is much more accurate though.
+
 ### E.hwRand()
 
-::i-chinese{sha="e815d28d7a07b25b68478393f96875db49cd8bb50c51fa5748939409832f042f"}
+::i-chinese{sha="248be90fdcb7a8a6b1d8b404fb828a5b07326ec9fd42cb84a400e2733c6e776a"}
 ::
-Unlike 'Math.random()' which uses a pseudo-random number generator, this
-method reads from the internal voltage reference several times, xoring and
-rotating to try and make a relatively random value from the noise in the
-signal.
+Unlike 'Math.random()' which uses a pseudo-random number generator, this method
+reads from the internal voltage reference several times, XOR-ing and rotating to
+try and make a relatively random value from the noise in the signal.
 
 ### E.on("init",listener)
 
@@ -234,26 +300,15 @@ E.on('init', function() {
 rather than replacing the last one. This allows you to write modular code -
 something that was not possible with `onInit`.
 
-### E.interpolate(array,index)
-
-::i-chinese{sha="aaf57319d9d2909ae85502543268b0a942ac058d562efc1190432e0db6e50bb7"}
-::
-Interpolate between two adjacent values in the Typed Array
-
-### E.interpolate2d(array,width,x,y)
-
-::i-chinese{sha="4484ae4f9d23a04f2c52311343e47538728b52b5f040a0dc1f786e8fd98a8a13"}
-::
-Interpolate between four adjacent values in the Typed Array, in 2D.
-
 ### E.kickWatchdog()
 
-::i-chinese{sha="d5d48190a65e71f45f7b998b1b893e25fb6b5a04718e87b368a18bc83e187632"}
+::i-chinese{sha="59de045d2f51bfae18a58ee379fb3673cbb8b35a936f2a7cfcff4774bc1c1839"}
 ::
 Kicks a Watchdog timer set up with `E.enableWatchdog(..., false)`. See
 `E.enableWatchdog` for more information.
 
-> **NOTE:** This is only implemented on STM32 and nRF5x devices.
+> **NOTE:** This is only implemented on STM32 and nRF5x devices (all official
+Espruino boards).
 
 ### E.on("kill",listener)
 
@@ -276,10 +331,10 @@ a Watchdog timer reset.
 
 ### E.lockConsole()
 
-::i-chinese{sha="bee1983c4d6769eca27dff5ae2c36932c38412101968c1c740a88c2fa377d967"}
+::i-chinese{sha="2a68e49b687a0226dce8b64e5cca5a09390e343e9352b61d3e0d2bff7d4ddc8f"}
 ::
-If a password has been set with `E.setPassword()`, this will lock the console
-so the password needs to be entered to unlock it.
+If a password has been set with `E.setPassword()`, this will lock the console so
+the password needs to be entered to unlock it.
 
 ### E.lookupNoCase(haystack,needle,returnKey)
 
@@ -289,10 +344,10 @@ Search in an Object, Array, or Function
 
 ### E.mapInPlace(from,to,map,bits)
 
-::i-chinese{sha="712ef9fa3ec4852b91af8b62858095bb7dbd05d067fa9d4b4fa7e2883eb18116"}
+::i-chinese{sha="19b7f733529b17b91889a9432c8cf9dc8192d7d95148cebd7238253c355fd950"}
 ::
-Take each element of the `from` array, look it up in `map` (or call `map(value,index)` 
-if it is a function), and write it into the corresponding
+Take each element of the `from` array, look it up in `map` (or call
+`map(value,index)` if it is a function), and write it into the corresponding
 element in the `to` array.
 
 You can use an array to map:
@@ -328,10 +383,10 @@ E.mapInPlace(a, b, undefined, -12); // 12 bits from 8 bit input, lsb-first
 
 ### E.memoryMap(baseAddress,registers)
 
-::i-chinese{sha="86d27740fa54190e2d159a4643782d2891e92752542859013a00e7e4075ed381"}
+::i-chinese{sha="dc3ed90888e08f84a8c06fb92504b26c5f1c24faa90a84755e86642602907905"}
 ::
-Create an object where every field accesses a specific 32 bit address in the microcontroller's memory. This
-is perfect for accessing on-chip peripherals.
+Create an object where every field accesses a specific 32 bit address in the
+microcontroller's memory. This is perfect for accessing on-chip peripherals.
 
 ```javascript
 // for NRF52 based chips
@@ -344,10 +399,10 @@ GPIO.OUT ^= 1; // toggle the output state of GPIO0
 
 ### E.reboot()
 
-::i-chinese{sha="c4ca5caaa25a387f3740613b727021293ea210c205c37343547c8ce779d6fb81"}
+::i-chinese{sha="4916ee2089e8ba23dd8d5a1c9ac006b91e6605bf954b538bbed7679ee2ac9465"}
 ::
-Forces a hard reboot of the microcontroller - as close as possible
-to if the reset pin had been toggled.
+Forces a hard reboot of the microcontroller - as close as possible to if the
+reset pin had been toggled.
 
 > **Note:** This is different to `reset()`, which performs a software
 reset of Espruino (resetting the interpreter and pin states, but not
@@ -365,18 +420,18 @@ For example, `E.reverseByte(0b10010000) == 0b00001001`.
 
 ### E.setBootCode(code,alwaysExec)
 
-::i-chinese{sha="1459a27e8cb1f7bb97213e98c67bad05765ed06e069bc0cb67345d31b3a1ce24"}
+::i-chinese{sha="b46e79ec2ea9f638365c137fb1020ec6c67056c38b9b57748fa853ccc038ce2c"}
 ::
 This writes JavaScript code into Espruino's flash memory, to be executed on
-startup. It differs from `save()` in that `save()` saves the whole state of
-the interpreter, whereas this just saves JS code that is executed at boot.
+startup. It differs from `save()` in that `save()` saves the whole state of the
+interpreter, whereas this just saves JS code that is executed at boot.
 
 Code will be executed before `onInit()` and `E.on('init', ...)`.
 
 If `alwaysExec` is `true`, the code will be executed even after a call to
-`reset()`. This is useful if you're making something that you want to
-program, but you want some code that is always built in (for instance
-setting up a display or keyboard).
+`reset()`. This is useful if you're making something that you want to program,
+but you want some code that is always built in (for instance setting up a
+display or keyboard).
 
 To remove boot code that has been saved previously, use `E.setBootCode("")`
 
@@ -384,10 +439,10 @@ To remove boot code that has been saved previously, use `E.setBootCode("")`
 
 ### E.setClock(options)
 
-::i-chinese{sha="15e643b9ca49f7c1c9d70b3cd1bf24966e77583af0f6b3979e984c4b61a7d353"}
+::i-chinese{sha="a37099a41f98c9c964aca3c5839ddfacd840771e6b9994ddc29a0fde80069178"}
 ::
-This sets the clock frequency of Espruino's processor. It will return `0` if
-it is unimplemented or the clock speed cannot be changed.
+This sets the clock frequency of Espruino's processor. It will return `0` if it
+is unimplemented or the clock speed cannot be changed.
 
 > **Note:** On pretty much all boards, UART, SPI, I2C, PWM, etc will change
 frequency and will need setting up again in order to work.
@@ -404,60 +459,110 @@ Optional arguments are:
 * `PCLK1` - Peripheral clock 1 divisor (default: 2)
 * `PCLK2` - Peripheral clock 2 divisor (default: 4)
 
-The Pico's default is `{M:8, N:336, P:4, Q:7, PCLK1:2, PCLK2:4}`, use
-`{M:8, N:336, P:8, Q:7, PCLK:1, PCLK2:2}` to halve the system clock speed
-while keeping the peripherals running at the same speed (omitting PCLK1/2
-will lead to the peripherals changing speed too).
+The Pico's default is `{M:8, N:336, P:4, Q:7, PCLK1:2, PCLK2:4}`, use `{M:8,
+N:336, P:8, Q:7, PCLK:1, PCLK2:2}` to halve the system clock speed while keeping
+the peripherals running at the same speed (omitting PCLK1/2 will lead to the
+peripherals changing speed too).
 
-On STM32F4 boards (eg. Espruino Pico), the USB clock needs to be kept at 48Mhz
-or USB will fail to work. You'll also experience USB instability if the processor
-clock falls much below 48Mhz.
+On STM32F4 boards (e.g. Espruino Pico), the USB clock needs to be kept at 48Mhz
+or USB will fail to work. You'll also experience USB instability if the
+processor clock falls much below 48Mhz.
 
 ESP8266 Just specify an integer value, either 80 or 160 (for 80 or 160Mhz)
 
 ### E.setConsole(device,options)
 
-::i-chinese{sha="f7de90664fd0a2df5333eadb6f615a33f8276a3e2a419f3387a09bb397562f6d"}
+::i-chinese{sha="a5bc6d4a7ff975a49d7e73dde034fc661f70145d9e19929e019eb6df104588d0"}
 ::
-Changes the device that the JS console (otherwise known as the REPL)
-is attached to. If the console is on a device, that
-device can be used for programming Espruino.
+Changes the device that the JS console (otherwise known as the REPL) is attached
+to. If the console is on a device, that device can be used for programming
+Espruino.
 
 Rather than calling `Serial.setConsole` you can call
 `E.setConsole("DeviceName")`.
 
-This is particularly useful if you just want to
-remove the console. `E.setConsole(null)` will
-make the console completely inaccessible.
+This is particularly useful if you just want to remove the console.
+`E.setConsole(null)` will make the console completely inaccessible.
 
-`device` may be `"Serial1"`,`"USB"`,`"Bluetooth"`,`"Telnet"`,`"Terminal"`,
-any other *hardware* `Serial` device, or `null` to disable the console completely.
+`device` may be `"Serial1"`,`"USB"`,`"Bluetooth"`,`"Telnet"`,`"Terminal"`, any
+other *hardware* `Serial` device, or `null` to disable the console completely.
 
 `options` is of the form:
 
 ```javascript
 {
   force : bool // default false, force the console onto this device so it does not move
-               //   if false, changes in connection state (eg USB/Bluetooth) can move
+               //   if false, changes in connection state (e.g. USB/Bluetooth) can move
                //   the console automatically.
 }
 ```
 
+### E.setDST(params)
+
+::i-chinese{sha="4262c5d123d56c8296a5d2c8caf0a0dbd2e012288ca1016d9fe293fef8b5b13e"}
+::
+Set the daylight savings time parameters to be used with `Date` objects.
+
+The parameters are
+- dstOffset: The number of minutes daylight savings time adds to the clock
+  (usually 60) - set to 0 to disable DST
+- timezone: The time zone, in minutes, when DST is not in effect - positive east
+  of Greenwich
+- startDowNumber: The index of the day-of-week in the month when DST starts - 0
+  for first, 1 for second, 2 for third, 3 for fourth and 4 for last
+- startDow: The day-of-week for the DST start calculation - 0 for Sunday, 6 for
+  Saturday
+- startMonth: The number of the month that DST starts - 0 for January, 11 for
+  December
+- startDayOffset: The number of days between the selected day-of-week and the
+  actual day that DST starts - usually 0
+- startTimeOfDay: The number of minutes elapsed in the day before DST starts
+- endDowNumber: The index of the day-of-week in the month when DST ends - 0 for
+  first, 1 for second, 2 for third, 3 for fourth and 4 for last
+- endDow: The day-of-week for the DST end calculation - 0 for Sunday, 6 for
+  Saturday
+- endMonth: The number of the month that DST ends - 0 for January, 11 for
+  December
+- endDayOffset: The number of days between the selected day-of-week and the
+  actual day that DST ends - usually 0
+- endTimeOfDay: The number of minutes elapsed in the day before DST ends
+
+To determine what the `dowNumber, dow, month, dayOffset, timeOfDay` parameters
+should be, start with a sentence of the form "DST starts on the last Sunday of
+March (plus 0 days) at 03:00". Since it's the last Sunday, we have
+startDowNumber = 4, and since it's Sunday, we have startDow = 0. That it is
+March gives us startMonth = 2, and that the offset is zero days, we have
+startDayOffset = 0. The time that DST starts gives us startTimeOfDay = 3*60.
+
+"DST ends on the Friday before the second Sunday in November at 02:00" would
+give us endDowNumber=1, endDow=0, endMonth=10, endDayOffset=-2 and
+endTimeOfDay=120.
+
+Using Ukraine as an example, we have a time which is 2 hours ahead of GMT in
+winter (EET) and 3 hours in summer (EEST). DST starts at 03:00 EET on the last
+Sunday in March, and ends at 04:00 EEST on the last Sunday in October. So
+someone in Ukraine might call `E.setDST(60,120,4,0,2,0,180,4,0,9,0,240);`
+
+Note that when DST parameters are set (i.e. when `dstOffset` is not zero),
+`E.setTimeZone()` has no effect.
+
 ### E.setFlags(flags)
 
-::i-chinese{sha="50a61ee05f3b9386bbd6bee1b7b880ab22f624d1d222b9003709d32bf186106c"}
+::i-chinese{sha="2979ac6a234b2e84c59a63554aa9e8773e3ecb536e3ef81ade0d11cf2d4ea37f"}
 ::
-Set the Espruino interpreter flags that control the way it handles your JavaScript code.
+Set the Espruino interpreter flags that control the way it handles your
+JavaScript code.
 
-Run `E.getFlags()` and check its description for a list of available flags and their values.
+Run `E.getFlags()` and check its description for a list of available flags and
+their values.
 
 ### E.setPassword(password)
 
-::i-chinese{sha="92297b5da3661cc2d922c157c28aa69cac6c77decfa392bd2b98b5acaf10993b"}
+::i-chinese{sha="b5cb91a732c16e6e5b7b588877658f3f9ebaa8f32e1a6a7b23d3794ded0bc834"}
 ::
-Set a password on the console (REPL). When powered on, Espruino will
-then demand a password before the console can be used. If you want to
-lock the console immediately after this you can call `E.lockConsole()`
+Set a password on the console (REPL). When powered on, Espruino will then demand
+a password before the console can be used. If you want to lock the console
+immediately after this you can call `E.lockConsole()`
 
 To remove the password, call this function with no arguments.
 
@@ -471,10 +576,16 @@ obtain it.
 
 ### E.setTimeZone(zone)
 
-::i-chinese{sha="b9adef105639134d5ea54ab08e02b502349f3a3c258437f9a4087a423ad799ce"}
+::i-chinese{sha="95abe921fc65b76c21359347d7d118e0ab36ef96219c2d107f09c2b2436e003a"}
 ::
 Set the time zone to be used with `Date` objects.
-For example `E.setTimeZone(1)` will be GMT+0100.
+
+For example `E.setTimeZone(1)` will be GMT+0100
+
+Note that `E.setTimeZone()` will have no effect when daylight savings time rules
+have been set with `E.setDST()`. The timezone value will be stored, but never
+used so long as DST settings are in effect.
+
 Time can be set with `setTime`.
 
 ### E.srand(v)
@@ -491,22 +602,23 @@ Sum the contents of the given Array, String or ArrayBuffer and return the result
 
 ### E.toArrayBuffer(str)
 
-::i-chinese{sha="d278efdd426bcb14555cc2dec33001c82facbe4d9f841aca460afdfd18614f50"}
+::i-chinese{sha="0cdba07dcc8d7900289a98d2ac34a72a9a64d86f3bd26342d5882fe1b2e31ab2"}
 ::
-Create an ArrayBuffer from the given string. This is done via a reference, not a copy - so it is very fast and memory efficient.
+Create an ArrayBuffer from the given string. This is done via a reference, not a
+copy - so it is very fast and memory efficient.
 
 > **Note:** that this is an ArrayBuffer, not a Uint8Array. To get one of those, do: `new Uint8Array(E.toArrayBuffer('....'))`.
 
 ### E.toJS(arg)
 
-::i-chinese{sha="0ba6b2268ef00b89dc92d8e4dbb7233f2dbf41577003399fc0692822e3f9d7dd"}
+::i-chinese{sha="0125f375d68b2960d518869449da39ebce7f44fa55934d998f58293ab644e2be"}
 ::
-This performs the same basic function as `JSON.stringify`,
-however `JSON.stringify` adds extra characters to conform
-to the JSON spec which aren't required if outputting JS.
+This performs the same basic function as `JSON.stringify`, however
+`JSON.stringify` adds extra characters to conform to the JSON spec which aren't
+required if outputting JS.
 
-`E.toJS` will also stringify JS functions, whereas
-`JSON.stringify` ignores them.
+`E.toJS` will also stringify JS functions, whereas `JSON.stringify` ignores
+them.
 
 For example:
 
@@ -518,38 +630,42 @@ reliably parsed by `JSON.parse` - however they are
 valid JS so will work with `eval` (but this has security
 implications if you don't trust the source of the string).
 
-On the desktop [JSON5 parsers](https://github.com/json5/json5)
-will parse the strings produced by `E.toJS` without trouble.
+On the desktop [JSON5 parsers](https://github.com/json5/json5) will parse the
+strings produced by `E.toJS` without trouble.
 
 ### E.toString(args)
 
-::i-chinese{sha="689d2ee7b567f495f69a1f8d7896e3b49cc250962027789a9066712c49f4eeb1"}
+::i-chinese{sha="b85cbb7f95b34bbca757b6bfe53ef7d7c8fcae81003d5a19e15a8a460dfbae3c"}
 ::
-Returns a 'flat' string representing the data in the arguments, or return `undefined`
-if a flat string cannot be created.
+Returns a 'flat' string representing the data in the arguments, or return
+`undefined` if a flat string cannot be created.
 
-This creates a string from the given arguments. If an argument is a String or an Array,
-each element is traversed and added as an 8 bit character. If it is anything else, it is
-converted to a character directly.
+This creates a string from the given arguments. If an argument is a String or an
+Array, each element is traversed and added as an 8 bit character. If it is
+anything else, it is converted to a character directly.
 
 In the case where there's one argument which is an 8 bit typed array backed by a
-flat string of the same length, the backing string will be returned without doing
-a copy or other allocation. The same applies if there's a single argument which
-is itself a flat string.
+flat string of the same length, the backing string will be returned without
+doing a copy or other allocation. The same applies if there's a single argument
+which is itself a flat string.
 
 ### E.toUint8Array(args)
 
-::i-chinese{sha="cfc4ca7d6371dba19493f4d9c060bbf5bd92a65b91902a2369713c2d8c0d0f36"}
+::i-chinese{sha="025d397b809786da69791429d2533e5be497b522a83bd97b7117785560c882d1"}
 ::
-This creates a Uint8Array from the given arguments. These are handled as follows:
+This creates a Uint8Array from the given arguments. These are handled as
+follows:
 
  * `Number` -> read as an integer, using the lowest 8 bits
- * `String` -> use each character's numeric value (eg. `String.charCodeAt(...)`)
+ * `String` -> use each character's numeric value (e.g.
+   `String.charCodeAt(...)`)
  * `Array` -> Call itself on each element
  * `ArrayBuffer` or Typed Array -> use the lowest 8 bits of each element
  * `Object`:
-   * `{data:..., count: int}` -> call itself `object.count` times, on `object.data`
-   * `{callback : function}` -> call the given function, call itself on return value
+   * `{data:..., count: int}` -> call itself `object.count` times, on
+     `object.data`
+   * `{callback : function}` -> call the given function, call itself on return
+     value
 
 For example:
 
@@ -562,6 +678,27 @@ E.toUint8Array("Hello")
 =new Uint8Array([72, 101, 108, 108, 111])
 E.toUint8Array(["hi",{callback:function() { return [1,2,3] }}])
 =new Uint8Array([104, 105, 1, 2, 3])
+```
+
+### E.on("touch",listener)
+
+::i-chinese{sha="431d1267d21f9e61d36dbebb21ad8b03eb8049f8ab0031ba28358e14d8d1ef14"}
+::
+This event is called when a full touchscreen device on an Espruino is interacted
+with.
+
+**Note:** This event is not implemented on Bangle.js because it only has a two
+area touchscreen.
+
+To use the touchscreen to draw lines, you could do:
+
+```
+var last;
+E.on('touch',t=>{
+  if (last) g.lineTo(t.x, t.y);
+  else g.moveTo(t.x, t.y);
+  last = t.b;
+});
 ```
 
 ### E.variance(arr,mean)

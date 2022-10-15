@@ -41,6 +41,7 @@ If not specified in options, the default pins are used (usually the lowest numbe
 
 ### I2C.prototype.writeTo(address,data)
 
-::i-chinese{sha="39f5011e89644164d5eb1198ffdff33b429b63d2ddf1c5909fce4e1cca694c05"}
+::i-chinese{sha="9ba2c6ccc7293ed69bf9b8afdcd0af74230d545ceb24e30fe0991d903dedbb67"}
 ::
-Transmit to the slave device with the given address. This is like Arduino's beginTransmission, write, and endTransmission rolled up into one.
+Transmit to the slave device with the given address. This is like Arduino's
+beginTransmission, write, and endTransmission rolled up into one.

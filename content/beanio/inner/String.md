@@ -13,7 +13,7 @@ tags: [object]
 ::
 Create a new String
 
-<!--18--> 
+<!--21--> 
 
 ### String.prototype.charAt(pos)
 
@@ -23,11 +23,19 @@ Return a single character at the given position in the String.
 
 ### String.prototype.charCodeAt(pos)
 
-::i-chinese{sha="fc1602bb0a7ef2cc23bd83c60c4b4a8741a6dec67fc91891e808431d59a12800"}
+::i-chinese{sha="59f5efb12dee7c7b1cbb1b76f91f361c4e1cab7e6103f27a3201f5e3864f5781"}
 ::
-Return the integer value of a single character at the given position in the String.
+Return the integer value of a single character at the given position in the
+String.
 
 Note that this returns 0 not 'NaN' for out of bounds characters
+
+### String.prototype.concat(args)
+
+::i-chinese{sha="69e7e6e917f60c03ff89d257c51d49f0aa1d2009c2f3d944a7813fa9ed3550af"}
+::
+Append all arguments to this `String` and return the result. Does not modify the
+original `String`.
 
 ### String.prototype.endsWith(searchString,length)
 
@@ -61,7 +69,7 @@ Find the length of the string
 
 ### String.prototype.match(substr)
 
-::i-chinese{sha="6a9547df66a7a3c27519f68d47acecae7e53da30917c62bea044b79387cdb45a"}
+::i-chinese{sha="68332f2e6819c0c635e945309814062e61e79d3426d8c16a2b3e73a37a8d6049"}
 ::
 Matches an occurrence `subStr` in the string.
 
@@ -73,20 +81,41 @@ Returns `null` if no match, or:
   index: 1,    // the start index of the match
   input: "b"   // the input string
  ]
-
 "abcdefabcdef".match(/bcd/) == [
   "bcd", index: 1,
   input: "abcdefabcdef"
  ]
 ```
 
-`Global` RegEx matches just return an array of matches (with no indices):
+'Global' RegExp matches just return an array of matches (with no indices):
 
 ```javascript
 "abcdefabcdef".match(/bcd/g) = [
   "bcd",
   "bcd"
  ]
+```
+
+### String.prototype.padEnd(targetLength,padString)
+
+::i-chinese{sha="1e16147b48891df9d28979fd914dcf0cf5e4bbd019b57df1ac7b293261ef45cc"}
+::
+Pad this string at the end to the required number of characters
+
+```
+"Hello".padEnd(10) == "Hello     "
+"123".padEnd(10,".-") == "123.-.-.-."
+```
+
+### String.prototype.padStart(targetLength,padString)
+
+::i-chinese{sha="133b8cbf2d1c26cc0e55ac68d9f8d8630fe8318f7585d2063ea48ed8d502c575"}
+::
+Pad this string at the beginning to the required number of characters
+
+```
+"Hello".padStart(10) == "     Hello"
+"123".padStart(10,".-") == ".-.-.-.123"
 ```
 
 ### String.prototype.repeat(count)
@@ -97,9 +126,11 @@ Repeat this string the given number of times.
 
 ### String.prototype.replace(subStr,newSubStr)
 
-::i-chinese{sha="3e4704da9774b0e825aee2aa1fb26413837eb14cf7d229a144f561f970c5993a"}
+::i-chinese{sha="5f652521d46d4c0d44fea25546644f38acd3d9a83a50b3cc9137f75f9c548361"}
 ::
-Search and replace ONE occurrance of `subStr` with `newSubStr` and return the result. This doesn't alter the original string. Regular expressions not supported.
+Search and replace ONE occurrence of `subStr` with `newSubStr` and return the
+result. This doesn't alter the original string. Regular expressions not
+supported.
 
 ### String.prototype.slice(start,end)
 
@@ -109,11 +140,12 @@ Part of this string from start for len characters
 
 ### String.prototype.split(separator)
 
-::i-chinese{sha="452a09f26766cf67a4eec8ffd928f167e9125faa5d41f66bb7f114f8b5e2b3d1"}
+::i-chinese{sha="470ecbf00a153a1f97cb4a7c25810673778807c0b7509ec26567b36e4763288b"}
 ::
 Return an array made by splitting this string up by the separator. eg. `'1,2,3'.split(',')==['1', '2', '3']`
 
-Regular Expressions can also be used to split strings, eg. `'1a2b3 4'.split(/[^0-9]/)==['1', '2', '3', '4']`.
+Regular Expressions can also be used to split strings, e.g. `'1a2b3
+4'.split(/[^0-9]/)==['1', '2', '3', '4']`.
 
 ### String.prototype.startsWith(searchString,position)
 

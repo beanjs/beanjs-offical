@@ -9,9 +9,10 @@ tags: [object]
 
 ### DataView.constructor(buffer,byteOffset,byteLength)
 
-::i-chinese{sha="4318127314e73d9d2d32ec751ac0526fc8c4baa8d672367fc79e8b41846b9fbd"}
+::i-chinese{sha="7b8197cbb7825b5e7090dd7b838f2f351dd6607b7d2cdba6e95f50220a78202b"}
 ::
-Create a `DataView` object that can be used to access the data in an `ArrayBuffer`.
+Create a `DataView` object that can be used to access the data in an
+`ArrayBuffer`.
 
 ```javascript
 var b = new ArrayBuffer(8)

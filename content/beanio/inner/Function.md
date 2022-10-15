@@ -35,7 +35,8 @@ This executes the function with the supplied `this` argument and parameters
 
 ### Function.prototype.replaceWith(newFunc)
 
-::i-chinese{sha="580e5c4e1d78da1e37d1b72b93269eeb737bd12ccd3e9c2bcfae5d4a6aa65eb5"}
+::i-chinese{sha="01e93d80890b7c46c3c0f2f174dd7440e0a6a52d6b91d7cc585084ff329ffd34"}
 ::
-This replaces the function with the one in the argument - while keeping the old function's scope.
-This allows inner functions to be edited, and is used when edit() is called on an inner function.
+This replaces the function with the one in the argument - while keeping the old
+function's scope. This allows inner functions to be edited, and is used when
+edit() is called on an inner function.

@@ -42,14 +42,15 @@ However only pins connected to an ADC will work (see the datasheet)
 
 ### analogWrite(pin,value,options)
 
-::i-chinese{sha="91b1e086585ec2f326ac574d38ab774f1ec4576227405d4cedb721afc2110b28"}
+::i-chinese{sha="e23bd7a05b62a72f7a3912491e8c0c4067158ffbc6902df659517ec574b8c149"}
 ::
 Set the analog Value of a pin. It will be output using PWM.
 Objects can contain:
 
 * `freq` - pulse frequency in Hz, eg. `analogWrite(A0,0.5,{ freq : 10 });` - specifying a frequency will force PWM output, even if the pin has a DAC
 * `soft` - boolean, If true software PWM is used if hardware is not available.
-* `forceSoft` - boolean, If true software PWM is used even if hardware PWM or a DAC is available
+* `forceSoft` - boolean, If true software PWM is used even if hardware PWM or a
+  DAC is available
 
 > **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `"analog_output"`
 
@@ -88,7 +89,7 @@ Encode the supplied string (or array) into a base64 string
 
 ### changeInterval(id,time)
 
-::i-chinese{sha="0525e3333e164d380d824222cb3e1b5be075bf6464761237333d96009f2a4734"}
+::i-chinese{sha="f6e31f464f7f6fb67ea2fb8d58f242a9089490e197dc7521fcc3412891d89c33"}
 ::
 Change the Interval on a callback created with `setInterval`, for example:
 
@@ -98,8 +99,8 @@ changeInterval(id, 1500); // now runs every 1.5 seconds
 ```
 
 This takes effect immediately and resets the timeout, so in the example above,
-regardless of when you call `changeInterval`, the next interval will occur 1500ms
-after it.
+regardless of when you call `changeInterval`, the next interval will occur
+1500ms after it.
 
 ### clearInterval(id)
 
@@ -138,61 +139,78 @@ To avoid accidentally deleting all Watches, if a parameter is supplied but is `u
 
 ### decodeURIComponent(str)
 
-::i-chinese{sha="e47073dd7c5539f1cecb0c01c3d9bf4e95c73db8426a2d2e5bafb8c9a9a0567d"}
+::i-chinese{sha="837fd2158fb14a26104a2e4ab68b6449cafa5150e8ed45785305c7f44f24f11c"}
 ::
-Convert any groups of characters of the form '%ZZ', into characters with hex code '0xZZ'
+Convert any groups of characters of the form '%ZZ', into characters with hex
+code '0xZZ'
 
 ### digitalPulse(pin,value,time)
 
-::i-chinese{sha="ff01d7f7d6528119555a8492e60452923a2709409bb5bd8a222a6ea9e707db45"}
+::i-chinese{sha="e407ef2c0ae64e540cb3df813fd07ec35b1a0222e42b1b74b3264bb56d62ffe1"}
 ::
-Pulse the pin with the value for the given time in milliseconds. It uses a hardware timer to produce accurate pulses, and returns immediately (before the pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse has finished.
+Pulse the pin with the value for the given time in milliseconds. It uses a
+hardware timer to produce accurate pulses, and returns immediately (before the
+pulse has finished). Use `digitalPulse(A0,1,0)` to wait until a previous pulse
+has finished.
 
-eg. `digitalPulse(A0,1,5);` pulses A0 high for 5ms. `digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for 4ms
+e.g. `digitalPulse(A0,1,5);` pulses A0 high for 5ms.
+`digitalPulse(A0,1,[5,2,4]);` pulses A0 high for 5ms, low for 2ms, and high for
+4ms
 
 > **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `"output"`
 
-digitalPulse is for SHORT pulses that need to be very accurate. If you're doing anything over a few milliseconds, use setTimeout instead.
+digitalPulse is for SHORT pulses that need to be very accurate. If you're doing
+anything over a few milliseconds, use setTimeout instead.
 
 ### digitalRead(pin)
 
-::i-chinese{sha="bd6ef88f147d8f56a51a015780a9eb62b41313c024ccd9dd584d2b4b66035944"}
+::i-chinese{sha="d4d42c237ff3a7e7a4ece6a0132d6faeefef0e38f8256ac4e2c9b8f556391245"}
 ::
 Get the digital value of the given pin.
 
 > **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `"input"`
 
-If the pin argument is an array of pins (eg. `[A2,A1,A0]`) the value returned will be an number where
-the last array element is the least significant bit, for example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`
+If the pin argument is an array of pins (e.g. `[A2,A1,A0]`) the value returned
+will be an number where the last array element is the least significant bit, for
+example if `A0=A1=1` and `A2=0`, `digitalRead([A2,A1,A0]) == 0b011`
 
-If the pin argument is an object with a `read` method, the `read` method will be called and the integer value it returns
-passed back.
+If the pin argument is an object with a `read` method, the `read` method will be
+called and the integer value it returns passed back.
 
 ### digitalWrite(pin,value)
 
-::i-chinese{sha="96536f7a60a364c2aa80a9391cb9e5292064400ce4a36c6cacd578f62f7bf637"}
+::i-chinese{sha="72a33405a0186130e63d397e18f96203a3a14a6406785df9dfc69bcf2fb99a01"}
 ::
 Set the digital value of the given pin.
 
 > **Note:** if you didn't call `pinMode` beforehand then this function will also reset pin's state to `"output"`
 
-If pin argument is an array of pins (eg. `[A2,A1,A0]`) the value argument will be treated
-as an array of bits where the last array element is the least significant bit.
+If pin argument is an array of pins (e.g. `[A2,A1,A0]`) the value argument will
+be treated as an array of bits where the last array element is the least
+significant bit.
 
-In this case, pin values are set least significant bit first (from the right-hand side
-of the array of pins). This means you can use the same pin multiple times, for
-example `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0 followed by A1.
+In this case, pin values are set least significant bit first (from the
+right-hand side of the array of pins). This means you can use the same pin
+multiple times, for example `digitalWrite([A1,A1,A0,A0],0b0101)` would pulse A0
+followed by A1.
 
 If the pin argument is an object with a `write` method, the `write` method will
 be called with the value passed through.
 
 ### dump()
 
-::i-chinese{sha="4b3c4ec2f83f4d9940983316d29882f9b079bd4d5b7c231545272f6c8201686d"}
+::i-chinese{sha="9fc06d0db9f62bd9d7bcfab95449c13c87ecab11994f098d890ccde2f161cf0b"}
 ::
-Output current interpreter state in a text form such that it can be copied to a new device
+Output current interpreter state in a text form such that it can be copied to a
+new device
 
-> **Note:** 'Internal' functions are currently not handled correctly. You will need to recreate these in the `onInit` function.
+Espruino keeps its current state in RAM (even if the function code is stored in
+Flash). When you type `dump()` it dumps the current state of code in RAM plus
+the hardware state, then if there's code saved in flash it writes "// Code saved
+with E.setBootCode" and dumps that too.
+
+> **Note:** 'Internal' functions are currently not handled correctly. You will
+need to recreate these in the `onInit` function.
 
 ### echo(echoOn)
 
@@ -210,9 +228,10 @@ Fill the console with the contents of the given function, so you can edit it.
 
 ### encodeURIComponent(str)
 
-::i-chinese{sha="6d6026e7ef518d4abade388cbf4c92b2a1e376086ad951a982f4a5327590a0a0"}
+::i-chinese{sha="4ed0022e464531bfac402583a793334cf30f6992859c360c2b8e0aa8280f40a7"}
 ::
-Convert a string with any character not alphanumeric or `- _ . ! ~ * ' ( )` converted to the form `%XY` where `XY` is its hexadecimal representation
+Convert a string with any character not alphanumeric or `- _ . ! ~ * ' ( )`
+converted to the form `%XY` where `XY` is its hexadecimal representation
 
 ### eval(code)
 
@@ -222,9 +241,10 @@ Evaluate a string containing JavaScript code
 
 ### getPinMode(pin)
 
-::i-chinese{sha="afcbfbd99046ba9304c0105282dc70da23cc29dcc471247f42732356176ee11d"}
+::i-chinese{sha="55e876f9fe8a76d996fc90143d392cf647ebecf47eeb5d8dccfaa86e2300c409"}
 ::
-Return the current mode of the given pin. See `pinMode` for more information on returned values.
+Return the current mode of the given pin. See `pinMode` for more information on
+returned values.
 
 ### getSerial()
 
@@ -246,9 +266,10 @@ A reference to the global scope, where everything is defined.
 
 ### isFinite(x)
 
-::i-chinese{sha="2cd5902e3706f7dbeceb8c040ba1c12b3f781355f2ee0ff3314cedb6974441b6"}
+::i-chinese{sha="a93d919388b9e814fcf55c2959a5e411156e3677b23447e93cf9c7d6a7c4d774"}
 ::
-Is the parameter a finite num,ber or not? If needed, the parameter is first converted to a number.
+Is the parameter a finite number or not? If needed, the parameter is first
+converted to a number.
 
 ### isNaN(x)
 
@@ -258,7 +279,7 @@ Whether the x is NaN (Not a Number) or not
 
 ### load(filename)
 
-::i-chinese{sha="c36338f88a7e9faf6cb8cf4b9556db36efa113655717102edfe7bd8cb547a6e9"}
+::i-chinese{sha="9c066291edf0ce29e0b22c5ff7e0b95d715fdf805037b6e49ba9978d89e47a90"}
 ::
 Restart and load the program out of flash - this has an effect similar to
 completely rebooting Espruino (power off/power on), but without actually
@@ -268,14 +289,15 @@ This command only executes when the Interpreter returns to the Idle state - for
 instance `a=1;load();a=2;` will still leave `a` as undefined (or what it was
 set to in the saved program).
 
-Espruino will resume from where it was when you last typed `save()`.
-If you want code to be executed right after loading (for instance to initialise
-devices connected to Espruino), add an `init` event handler to `E` with
-`E.on('init', function() { ... your_code ... });`. This will then be automatically
-executed by Espruino every time it starts.
+Espruino will resume from where it was when you last typed `save()`. If you want
+code to be executed right after loading (for instance to initialise devices
+connected to Espruino), add an `init` event handler to `E` with `E.on('init',
+function() { ... your_code ... });`. This will then be automatically executed by
+Espruino every time it starts.
 
-**If you specify a filename in the argument then that file will be loaded
-from Storage after reset** in much the same way as calling `reset()` then `eval(require("Storage").read(filename))`
+**If you specify a filename in the argument then that file will be loaded from
+Storage after reset** in much the same way as calling `reset()` then
+`eval(require("Storage").read(filename))`
 
 ### parseFloat(string)
 
@@ -367,51 +389,64 @@ of what modules are and how you can use them.
 
 ### reset(clearFlash)
 
-::i-chinese{sha="baf6d1596150426c7e794faaf4a43edbd1caa8ae2d02e00392acb7f6821ad200"}
+::i-chinese{sha="1f811e361dfe765171045c409ea5dfbc2ce09183eb25ff391170466285ba098b"}
 ::
-Reset the interpreter - clear program memory in RAM, and do not load a saved program from flash. This does NOT reset the underlying hardware (which allows you to reset the device without it disconnecting from USB).
+Reset the interpreter - clear program memory in RAM, and do not load a saved
+program from flash. This does NOT reset the underlying hardware (which allows
+you to reset the device without it disconnecting from USB).
 
 This command only executes when the Interpreter returns to the Idle state - for instance `a=1;reset();a=2;` will still leave `a` as undefined.
 
 The safest way to do a full reset is to hit the reset button.
 
-If `reset()` is called with no arguments, it will reset the board's state in
-RAM but will not reset the state in flash. When next powered on (or when
-`load()` is called) the board will load the previously saved code.
+If `reset()` is called with no arguments, it will reset the board's state in RAM
+but will not reset the state in flash. When next powered on (or when `load()` is
+called) the board will load the previously saved code.
 
-Calling `reset(true)` will cause *all saved code in flash memory to
-be cleared as well*.
+Calling `reset(true)` will cause *all saved code in flash memory to be cleared
+as well*.
 
 ### save()
 
-::i-chinese{sha="aa334786802170bc9592488380a734dc4ecad69cb6fd46d8e5cd52f77789ac7a"}
+::i-chinese{sha="a46a97fc048a90c72af3960541c1b83295838e79b441602825651902a58ccf6e"}
 ::
 Save the state of the interpreter into flash (including the results of calling
-`setWatch`, `setInterval`, `pinMode`, and any listeners). The state will then be loaded automatically
- every time Espruino powers on or is hard-reset. To see what will get saved you can call `dump()`.
+`setWatch`, `setInterval`, `pinMode`, and any listeners). The state will then be
+loaded automatically every time Espruino powers on or is hard-reset. To see what
+will get saved you can call `dump()`.
 
-> **Note:** If you set up intervals/etc in `onInit()` and you have already called `onInit`
-before running `save()`, when Espruino resumes there will be two copies of your intervals -
-the ones from before the save, and the ones from after - which may cause you problems.
+> **Note:** If you set up intervals/etc in `onInit()` and you have already called
+`onInit` before running `save()`, when Espruino resumes there will be two copies
+of your intervals - the ones from before the save, and the ones from after -
+which may cause you problems.
+
+For more information about this and other options for saving, please see the
+[Saving code on Espruino](https://www.espruino.com/Saving) page.
 
 This command only executes when the Interpreter returns to the Idle state - for
 instance `a=1;save();a=2;` will save `a` as 2.
 
-When Espruino powers on, it will resume from where it was when you typed `save()`.
-If you want code to be executed right after loading (for instance to initialise
-devices connected to Espruino), add a function called `onInit`, or add a `init`
-event handler to `E` with `E.on('init', function() { ... your_code ... });`.
-This will then be automatically executed by Espruino every time it starts.
+When Espruino powers on, it will resume from where it was when you typed
+`save()`. If you want code to be executed right after loading (for instance to
+initialise devices connected to Espruino), add a function called `onInit`, or
+add a `init` event handler to `E` with `E.on('init', function() { ... your_code
+... });`. This will then be automatically executed by Espruino every time it
+starts.
+
+In order to stop the program saved with this command being loaded automatically,
+check out [the Troubleshooting
+guide](https://www.espruino.com/Troubleshooting#espruino-stopped-working-after-i-typed-save-)
 
 ### setBusyIndicator(pin)
 
-::i-chinese{sha="4522d3f86c953127930dcf6863304bc075df7fb6ad3046cc13a45582be4f5e49"}
+::i-chinese{sha="db79938258177b4bf5f7ea41e730556cb409fce62e6e46a27d6fc87a43cb3077"}
 ::
-When Espruino is busy, set the pin specified here high. Set this to undefined to disable the feature.
+When Espruino is busy, set the pin specified here high. Set this to undefined to
+disable the feature.
 
 ### setInterval(function,timeout,args)
 
-::i-chinese{sha="2a57d38512b99cc341e59e8edd05e3f2a3030f020431837136810cf77675cf1a"}
+::i-chinese{sha="edcdabf06748ce822290c3e5ca224d2602198c03708c979f9c06553312ac3b59"}
 ::
 Call the function (or evaluate the string) specified REPEATEDLY after the timeout in milliseconds.
 For instance:
@@ -425,7 +460,8 @@ setInterval('console.log("Hello World");', 1000);
 // both print 'Hello World' every second
 ```
 
-You can also specify extra arguments that will be sent to the function when it is executed. For example:
+You can also specify extra arguments that will be sent to the function when it
+is executed. For example:
 
 ```javascript
 setInterval(function (a,b) {
@@ -434,28 +470,29 @@ setInterval(function (a,b) {
 // prints 'Hello World' every second
 ```
 
-If you want to stop your function from being called, pass the number that
-was returned by `setInterval` into the `clearInterval` function.
+If you want to stop your function from being called, pass the number that was
+returned by `setInterval` into the `clearInterval` function.
 
 > **Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.
 
 ### setSleepIndicator(pin)
 
-::i-chinese{sha="0ad2d1f72bd51db12bd8db0f862dca3fc103d4d4e566234cf400c08e4fee16d9"}
+::i-chinese{sha="8f23f29fd4718843ed59c1e64106ef23537d06f9fdbc0177077c8ed8d1eb9903"}
 ::
-When Espruino is asleep, set the pin specified here low (when it's awake, set it high). Set this to undefined to disable the feature.
+When Espruino is asleep, set the pin specified here low (when it's awake, set it
+high). Set this to undefined to disable the feature.
 
 ### setTime(time)
 
-::i-chinese{sha="ec4173a776e5675339d1c99e310165f9be3d73025c7c28347973f4bb29da7824"}
+::i-chinese{sha="6222e321586565cdcdb815aa8540c8aee4130bf30d2200ed65648da4ef7e7b1c"}
 ::
-Set the current system time in seconds (to the nearest second).
+Set the current system time in seconds (`time` can be a floating point value).
 
-This is used with `getTime`, the time reported from `setWatch`, as
-well as when using `new Date()`.
+This is used with `getTime`, the time reported from `setWatch`, as well as when
+using `new Date()`.
 
-`Date.prototype.getTime()` reports the time in milliseconds, so
-you can set the time to a `Date` object using:
+`Date.prototype.getTime()` reports the time in milliseconds, so you can set the
+time to a `Date` object using:
 
 ```javascript
 setTime((new Date("Tue, 19 Feb 2019 10:57")).getTime()/1000)
@@ -465,7 +502,7 @@ To set the timezone for all new Dates, use `E.setTimeZone(hours)`.
 
 ### setTimeout(function,timeout,args)
 
-::i-chinese{sha="ffc07d36d705b051fe884e5e3127a39d33c913974d06437d749b4da82f12a727"}
+::i-chinese{sha="d372610c1496c978a11d39252b7c25230491cf935c8678ffba6e036b48e58c51"}
 ::
 Call the function (or evaluate the string) specified ONCE after the timeout in milliseconds.
 For instance:
@@ -479,7 +516,8 @@ setTimeout('console.log("Hello World");', 1000);
 // both print 'Hello World' after a second
 ```
 
-You can also specify extra arguments that will be sent to the function when it is executed. For example:
+You can also specify extra arguments that will be sent to the function when it
+is executed. For example:
 
 ```javascript
 setTimeout(function (a,b) {
@@ -488,18 +526,20 @@ setTimeout(function (a,b) {
 // prints 'Hello World' after 1 second
 ```
 
-If you want to stop the function from being called, pass the number that
-was returned by `setTimeout` into the `clearInterval` function.
+If you want to stop the function from being called, pass the number that was
+returned by `setTimeout` into the `clearTimeout` function.
 
 > **Note:** If `setDeepSleep(true)` has been called and the interval is greater than 5 seconds, Espruino may execute the interval up to 1 second late. This is because Espruino can only wake from deep sleep every second - and waking early would cause Espruino to waste power while it waited for the correct time.
 
 ### setWatch(function,pin,options)
 
-::i-chinese{sha="7928d91e4218433ebc703b7198965e848052ff2e185afce038f5444a95ef1bc4"}
+::i-chinese{sha="b707c33beb4e87b60515827f9745114be0db1864260b398efc39eb148bee69f1"}
 ::
-Call the function specified when the pin changes. Watches set with `setWatch` can be removed using `clearWatch`.
+Call the function specified when the pin changes. Watches set with `setWatch`
+can be removed using `clearWatch`.
 
-If the `options` parameter is an object, it can contain the following information (all optional):
+If the `options` parameter is an object, it can contain the following
+information (all optional):
 
 ```javascript
 var option = {
@@ -516,24 +556,37 @@ var option = {
    // Advanced: If specified, the given pin will be read whenever the watch is called
    // and the state will be included as a 'data' field in the callback
    data : pin
+   // Advanced: On Nordic devices, a watch may be 'high' or 'low' accuracy. By default low
+   // accuracy is used (which is better for power consumption), but this means that
+   // high speed pulses (less than 25us) may not be reliably received. Setting hispeed=true
+   // allows for detecting high speed pulses at the expense of higher idle power consumption
+   hispeed : true
 }
 ```
 
-The `function` callback is called with an argument, which is an object of type `{state:bool, time:float, lastTime:float}`.
+The `function` callback is called with an argument, which is an object of type
+`{state:bool, time:float, lastTime:float}`.
 
  * `state` is whether the pin is currently a `1` or a `0`
  * `time` is the time in seconds at which the pin changed state
- * `lastTime` is the time in seconds at which the **pin last changed state**. When using `edge:'rising'` or `edge:'falling'`, this is not the same as when the function was last called.
- * `data` is included if `data:pin` was specified in the options, and can be used for reading in clocked data
+ * `lastTime` is the time in seconds at which the **pin last changed state**.
+   When using `edge:'rising'` or `edge:'falling'`, this is not the same as when
+   the function was last called.
+ * `data` is included if `data:pin` was specified in the options, and can be
+   used for reading in clocked data
 
-For instance, if you want to measure the length of a positive pulse you could use `setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, { repeat:true, edge:'falling' });`.
-This will only be called on the falling edge of the pulse, but will be able to measure the width of the pulse because `e.lastTime` is the time of the rising edge.
+For instance, if you want to measure the length of a positive pulse you could
+use `setWatch(function(e) { console.log(e.time-e.lastTime); }, BTN, {
+repeat:true, edge:'falling' });`. This will only be called on the falling edge
+of the pulse, but will be able to measure the width of the pulse because
+`e.lastTime` is the time of the rising edge.
 
-Internally, an interrupt writes the time of the pin's state change into a queue with the exact
-time that it happened, and the function supplied to `setWatch` is executed only from the main
-message loop. However, if the callback is a native function `void (bool state)` then you can
-add `irq:true` to options, which will cause the function to be called from within the IRQ.
-When doing this, interrupts will happen on both edges and there will be no debouncing.
+Internally, an interrupt writes the time of the pin's state change into a queue
+with the exact time that it happened, and the function supplied to `setWatch` is
+executed only from the main message loop. However, if the callback is a native
+function `void (bool state)` then you can add `irq:true` to options, which will
+cause the function to be called from within the IRQ. When doing this, interrupts
+will happen on both edges and there will be no debouncing.
 
 > **Note:** if you didn't call `pinMode` beforehand then this function will reset pin's state to `"input"`
 
@@ -544,10 +597,10 @@ the watch with `clearWatch`.
 
 ### shiftOut(pins,options,data)
 
-::i-chinese{sha="f467c31feb86762383df34e4089caafb6b642c67ecabdbfb76ae58d215b6fb8e"}
+::i-chinese{sha="373936d5837fb5c28ba4671954cd6514e8248e8bf1ad726dac43788754ed0006"}
 ::
-Shift an array of data out using the pins supplied *least significant bit first*,
-for example:
+Shift an array of data out using the pins supplied *least significant bit
+first*, for example:
 
 ```javascript
 // shift out to single clk+data
@@ -574,9 +627,9 @@ var option = {
 }
 ```
 
-Each item in the `data` array will be output to the pins, with the first
-pin in the array being the MSB and the last the LSB, then the clock will be
-pulsed in the polarity given.
+Each item in the `data` array will be output to the pins, with the first pin in
+the array being the MSB and the last the LSB, then the clock will be pulsed in
+the polarity given.
 
 `repeat` is the amount of times shift data out for each array item. For instance
 we may want to shift 8 bits out through 2 pins - in which case we need to set

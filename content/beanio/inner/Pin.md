@@ -44,9 +44,10 @@ Return the current mode of the given pin. See `pinMode` for more information.
 
 ### Pin.prototype.mode(mode)
 
-::i-chinese{sha="0b63c7219f72120fae3686059ef281d82301ac03ac017f29ba5e89b3deadfe11"}
+::i-chinese{sha="14ca07e1f52812b8cae9e4854ab4125cf724e8fd47fcb325498552f4a20d6c89"}
 ::
-Set the mode of the given pin. See [`pinMode`](#l__global_pinMode) for more information on pin modes.
+Set the mode of the given pin. See [`pinMode`](#l__global_pinMode) for more
+information on pin modes.
 
 ### Pin.prototype.read()
 

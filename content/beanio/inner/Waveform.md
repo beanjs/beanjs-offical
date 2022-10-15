@@ -9,9 +9,11 @@ tags: [object]
 
 ### Waveform.constructor(samples,options)
 
-::i-chinese{sha="f41c7b80dba9e3f6d195a7b55d443b117a0790adb1d9978ad2a068be5d4e2393"}
+::i-chinese{sha="7ad7dbbc9270f27585480759e39b9a2918fbaa38d999e92a7774e769a029a6fc"}
 ::
-Create a waveform class. This allows high speed input and output of waveforms. It has an internal variable called `buffer` (as well as `buffer2` when double-buffered - see `options` below) which contains the data to input/output.
+Create a waveform class. This allows high speed input and output of waveforms.
+It has an internal variable called `buffer` (as well as `buffer2` when
+double-buffered - see `options` below) which contains the data to input/output.
 
 When double-buffered, a `buffer` event will be emitted each time a buffer is finished with (the argument is that buffer). When the recording stops, a `finish` event will be emitted (with the first argument as the buffer).
 
@@ -19,15 +21,18 @@ When double-buffered, a `buffer` event will be emitted each time a buffer is fin
 
 ### Waveform.prototype.startInput(output,freq,options)
 
-::i-chinese{sha="4d7853d96a31330958321933bd9730a775f5e987287038258e6c56cb643f4c66"}
+::i-chinese{sha="bce11241aa8bf9300b839e85b4c17f8a7168beeef51413fcb94ee75b4d71195a"}
 ::
-Will start inputting the waveform on the given pin that supports analog. If not repeating, it'll emit a `finish` event when it is done.
+Will start inputting the waveform on the given pin that supports analog. If not
+repeating, it'll emit a `finish` event when it is done.
 
 ### Waveform.prototype.startOutput(output,freq,options)
 
-::i-chinese{sha="61641eb0150e905607d57c24b0d6483924e78d20b5590ae9a03cfb1f84759a10"}
+::i-chinese{sha="389ef73737ff6e0f0de8d4a40bb2bc4d811fe4a35c2d502c2085eded091745d7"}
 ::
-Will start outputting the waveform on the given pin - the pin must have previously been initialised with analogWrite. If not repeating, it'll emit a `finish` event when it is done.
+Will start outputting the waveform on the given pin - the pin must have
+previously been initialised with analogWrite. If not repeating, it'll emit a
+`finish` event when it is done.
 
 ### Waveform.prototype.stop()
 

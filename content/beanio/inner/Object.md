@@ -23,9 +23,10 @@ Copy this object completely
 
 ### Object.prototype.emit(event,args)
 
-::i-chinese{sha="c22755848cb032d1daae044d8994d45caac4249e36353d641511cf84cd915098"}
+::i-chinese{sha="9c3492c15141998cbbb1639c4e698b9dcdca8ff2bd86121f30be069953ce32ff"}
 ::
-Call the event listeners for this object, for instance `E.emit('data', 'Foo')`. See Node.js's EventEmitter.
+Call any event listeners that were added to this object with `Object.on`, for
+instance `obj.emit('data', 'Foo')`.For more information see `Object.on`
 
 ### Object.prototype.hasOwnProperty(name)
 
@@ -43,19 +44,62 @@ Find the length of the object
 
 ### Object.prototype.on(event,listener)
 
-::i-chinese{sha="ca4e88c70efa99b9ea4eab1810e95b1b0b9d71e599fec672009302a84d7e3776"}
+::i-chinese{sha="0d3fe0a6e86c16528c5e9efeaa719e6b31d7ec065cc24b329f240966e18248b5"}
 ::
-Register an event listener for this object, for instance `E.on('data', function(d) {...})`. See Node.js's EventEmitter.
+Register an event listener for this object, for instance `Serial1.on('data',
+function(d) {...})`.
+
+This is the same as Node.js's [EventEmitter](https://nodejs.org/api/events.html)
+but on Espruino the functionality is built into every object:
+
+* `Object.on`
+* `Object.emit`
+* `Object.removeListener`
+* `Object.removeAllListeners`
+
+```
+var o = {}; // o can be any object...
+// call an arrow function when the 'answer' event is received
+o.on('answer', x => console.log(x));
+// call a named function when the 'answer' event is received
+function printAnswer(d) {
+  console.log("The answer is", d);
+}
+o.on('answer', printAnswer);
+// emit the 'answer' event - functions added with 'on' will be executed
+o.emit('answer', 42);
+// prints: 42
+// prints: The answer is 42
+// If you have a named function, it can be removed by name
+o.removeListener('answer', printAnswer);
+// Now 'printAnswer' is removed
+o.emit('answer', 43);
+// prints: 43
+// Or you can remove all listeners for 'answer'
+o.removeAllListeners('answer')
+// Now nothing happens
+o.emit('answer', 44);
+// nothing printed
+```
 
 ### Object.prototype.removeAllListeners(event)
 
-::i-chinese{sha="8d665a9febb9ef84152799debbcc5f07b34ef11e2c82b90cf5c7ab78da7c9366"}
+::i-chinese{sha="c006daff502b1abdf136d6e14782b92cf6f548fb600b4e4630acb783b44c31d9"}
 ::
-Removes all listeners, or those of the specified event.
+Removes all listeners (if `event===undefined`), or those of the specified event.
+
+```
+Serial1.on("data", function(data) { ... });
+Serial1.removeAllListeners("data");
+// or
+Serial1.removeAllListeners(); // removes all listeners for all event types
+```
+
+For more information see `Object.on`
 
 ### Object.prototype.removeListener(event,listener)
 
-::i-chinese{sha="9bbcff083f6b062cd0986b1c4c6944281069fac6e0829d20c439fa590bf35612"}
+::i-chinese{sha="c046e9dba306fa906358ed4b854523213503cd26e99c236d732190a0f0c2a4ad"}
 ::
 Removes the specified event listener.
 
@@ -66,6 +110,8 @@ function foo(d) {
 Serial1.on("data", foo);
 Serial1.removeListener("data", foo);
 ```
+
+For more information see `Object.on`
 
 ### Object.prototype.toString(radix)
 
@@ -79,7 +125,7 @@ Convert the Object to a string
 ::
 Returns the primitive value of this object.
 
-<!--9--> 
+<!--11--> 
 
 ### Object.assign(args)
 
@@ -92,30 +138,43 @@ if given raw strings, bools or numbers rather than objects.
 
 ### Object.create(proto,propertiesObject)
 
-::i-chinese{sha="b33f661d5bcb583b4bc54a264a023e6fe8e39284c9d53fa9fa09a174a1cf7467"}
+::i-chinese{sha="a6ac6f0555ce15c683ee9942cbb2b02a32349a51642b22e3c5374d16211f1be3"}
 ::
-Creates a new object with the specified prototype object and properties. properties are currently unsupported.
+Creates a new object with the specified prototype object and properties.
+properties are currently unsupported.
 
 ### Object.defineProperties(obj,props)
 
-::i-chinese{sha="afe460c22210ac2be0de0849843b1a7b0d66bf6699c26f920ff2d2d6a80c4fad"}
+::i-chinese{sha="5af051727082b9ec47f51ed6a5fb17dc46baf16d1cc12cfdb967798d0c35a3d1"}
 ::
-Adds new properties to the Object. See `Object.defineProperty` for more information
+Adds new properties to the Object. See `Object.defineProperty` for more
+information
 
 ### Object.defineProperty(obj,name,desc)
 
-::i-chinese{sha="f0ce109c2ad5767c9ed642e5c7b6739c7f0a842b02a639672f4a3228d66e21e8"}
+::i-chinese{sha="54cc2efc6965ece0316b90d50cc489ee03201ee188afc51bab474a82e947a461"}
 ::
 Add a new property to the Object. 'Desc' is an object with the following fields:
 
-* `configurable` (bool = false) - can this property be changed/deleted
-* `enumerable` (bool = false) - can this property be enumerated
+* `configurable` (bool = false) - can this property be changed/deleted (not
+  implemented)
+* `enumerable` (bool = false) - can this property be enumerated (not
+  implemented)
 * `value` (anything) - the value of this property
-* `writable` (bool = false) - can the value be changed with the assignment operator?
-* `get` (function) - the getter function, or undefined if no getter (only supported on some platforms)
-* `set` (function) - the setter function, or undefined if no setter (only supported on some platforms)
+* `writable` (bool = false) - can the value be changed with the assignment
+  operator?
+* `get` (function) - the getter function, or undefined if no getter (only
+  supported on some platforms)
+* `set` (function) - the setter function, or undefined if no setter (only
+  supported on some platforms)
 
 > **Note:** `configurable`, `enumerable`, `writable`, `get`, and `set` are not implemented and will be ignored.
+
+### Object.entries(object)
+
+::i-chinese{sha="199c7dafdef5f55a3e549f8f306ab7b331bbbcd37e3e65ad5162dc24d5af3e15"}
+::
+Return all enumerable keys and values of the given object
 
 ### Object.getOwnPropertyDescriptor(obj,name)
 
@@ -125,9 +184,10 @@ Get information on the given property in the object, or undefined
 
 ### Object.getOwnPropertyNames(object)
 
-::i-chinese{sha="facada9db1b57a176cf53310c42458642d2646becc2ad60623c8ad1f13337430"}
+::i-chinese{sha="79ea022644532b4207ed1cd36f757d41f2d5283fe0e653b3fc13424eb214b96c"}
 ::
-Returns an array of all properties (enumerable or not) found directly on a given object.
+Returns an array of all properties (enumerable or not) found directly on a given
+object.
 
 ### Object.getPrototypeOf(object)
 
@@ -148,3 +208,9 @@ Return all enumerable keys of the given object
 ::
 Set the prototype of the given object - this is like writing
 `object.__proto__ = prototype` but is the `proper` ES6 way of doing it
+
+### Object.values(object)
+
+::i-chinese{sha="0dc2f900aab7ddcb423fcb41c4b5e703f8c3735db93af24a9511db7ee5423ed4"}
+::
+Return all enumerable values of the given object

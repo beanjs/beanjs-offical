@@ -9,33 +9,31 @@ tags: [object]
 
 ### Promise.constructor(executor)
 
-::i-chinese{sha="da0822503d22c0e1f3f3b34d33061710f2587cb54b61b6d355926e84124b7da0"}
+::i-chinese{sha="719d9539b6d789223c27e63bf23742131c07696ab6f4da04aa15c47bb9483575"}
 ::
-Create a new Promise. The executor function is executed immediately (before the constructor even returns)
-and
+Create a new Promise. The executor function is executed immediately (before the
+constructor even returns) and
 
 <!--3--> 
 
 ### Promise.all(promises)
 
-::i-chinese{sha="822ea10fcf47379ff5a355f85956536cf923f74fd90acdead0fc8efc4598d40b"}
+::i-chinese{sha="a1cb8e6cefd71361fbb8a98c9379093e743675042f48a3bb14a5e4d7d5170a1b"}
 ::
-Return a new promise that is resolved when all promises in the supplied
-array are resolved.
+Return a new promise that is resolved when all promises in the supplied array
+are resolved.
 
 ### Promise.reject(promises)
 
-::i-chinese{sha="1b1d8072cf45b371d42268f47da8631b2e0c2a388d972be10f8efb3c1055b078"}
+::i-chinese{sha="84295cc780f3ddef62699ebe4295ed97463200f8f545f245a9be75a47214d5a2"}
 ::
-Return a new promise that is already rejected (at idle it'll
-call `.catch`)
+Return a new promise that is already rejected (at idle it'll call `.catch`)
 
 ### Promise.resolve(promises)
 
-::i-chinese{sha="7622b3b2bbeb72a671c2e38d08e15734d8c4eb0605fbfa30771f2b7dddf268da"}
+::i-chinese{sha="7f6b3c27c6b6c0c9009fdcc91c2d99186141cacf55c7fa4bd19a2b0780f31abd"}
 ::
-Return a new promise that is already resolved (at idle it'll
-call `.then`)
+Return a new promise that is already resolved (at idle it'll call `.then`)
 
 <!--2--> 
 

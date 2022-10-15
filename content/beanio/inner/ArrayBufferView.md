@@ -4,7 +4,7 @@ category: 'inner'
 tags: [object]
 ---
 
-<!--17--> 
+<!--18--> 
 
 ### ArrayBufferView.prototype.buffer
 
@@ -77,14 +77,15 @@ Join all elements of this array together into one string, using `separator` betw
 
 ### ArrayBufferView.prototype.map(function,thisArg)
 
-::i-chinese{sha="1af4076e771a006150ab075efd90b5a86690cab439f39aa2884eed48b155e830"}
+::i-chinese{sha="da68766e21c784b215ec952dd5aa04642649fccefc3e1cb9110f91909861677d"}
 ::
 Return an array which is made from the following: 
 ```javascript
 A.map(function) = [function(A[0]), function(A[1]), ...]
 ```
 
- **Note:** This returns an `ArrayBuffer` of the same type it was called on. To get an `Array`, use `Array.map`, eg. `[].map.call(myArray, x=>x+1)`
+> **Note:** This returns an `ArrayBuffer` of the same type it was called on. To
+ get an `Array`, use `Array.map`, e.g. `[].map.call(myArray, x=>x+1)`
 
 ### ArrayBufferView.prototype.reduce(callback,initialValue)
 
@@ -117,3 +118,10 @@ Return a copy of a portion of this array (in a new array).
 ::i-chinese{sha="e99772d155f9d7916b853fbfb99c6793b1cee45c964f250adb57ed418ae086c4"}
 ::
 Do an in-place quicksort of the array
+
+### ArrayBufferView.prototype.subarray(begin,end)
+
+::i-chinese{sha="ad2d30b4ab5f45cac2acf8c22de2ceaeb0b5b0ab63780dcf7dc857d4c060cdfb"}
+::
+Returns a smaller part of this array which references the same data (it doesn't
+copy it).

@@ -7,7 +7,7 @@ tags: [object]
 <!--constructor--> 
 <!--2--> 
 
-### RegExp.constructor(regex,regex)
+### RegExp.constructor(regex,flags)
 
 ::i-chinese{sha="e719ff822db4692bee080d78997b1fa6771492bed671a60186c5424b174cae88"}
 ::
@@ -17,9 +17,10 @@ Creates a RegExp object, for handling Regular Expressions
 
 ### RegExp.prototype.exec(str)
 
-::i-chinese{sha="5910d9a4c5222a25d6a2f0851af7483595e45f711e325df6ef951abcae82afa8"}
+::i-chinese{sha="d475e8dc9faef103ea8b65ee412dd41f64683088b692b0c0322e7a4d3bee6d2b"}
 ::
-Test this regex on a string - returns a result array on success, or `null` otherwise.
+Test this regex on a string - returns a result array on success, or `null`
+otherwise.
 
 
 ```javascript
@@ -42,6 +43,7 @@ Test this regex on a string - returns a result array on success, or `null` other
 
 ### RegExp.prototype.test(str)
 
-::i-chinese{sha="08eb4e57ad8182ec1de49c0cf17a18b498e9fd0105134132f223ce34f24fb89f"}
+::i-chinese{sha="150565f4e09838dd4b79f7283bd770919aa1741b57622e178d6a8bbbf95f36cb"}
 ::
-Test this regex on a string - returns `true` on a successful match, or `false` otherwise
+Test this regex on a string - returns `true` on a successful match, or `false`
+otherwise

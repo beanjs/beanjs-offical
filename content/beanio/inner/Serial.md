@@ -17,9 +17,11 @@ Use `Serial.setup` to configure this port.
 
 ### Serial.on("data",listener)
 
-::i-chinese{sha="f67fb463081290fc53a9fe30cbd4b4ec06c032ffa734b83eb3d88de3934ba9bf"}
+::i-chinese{sha="4a7b21738316fc64d590bbbbe0b755a92813f5179acde78adf946746a6c347b6"}
 ::
-The `data` event is called when data is received. If a handler is defined with `X.on('data', function(data) { ... })` then it will be called, otherwise data will be stored in an internal buffer, where it can be retrieved with `X.read()`
+The `data` event is called when data is received. If a handler is defined with
+`X.on('data', function(data) { ... })` then it will be called, otherwise data
+will be stored in an internal buffer, where it can be retrieved with `X.read()`
 
 ### Serial.find(pin)
 
@@ -30,14 +32,14 @@ May return `undefined` if no device can be found.
 
 ### Serial.on("framing",listener)
 
-::i-chinese{sha="467dc97e6207ff2df8b4fcecc16c042edb1face1befd88609d213d6f955e8b50"}
+::i-chinese{sha="e37f679b8479534f6bcf17233955f7c0934f90b38be6332c9d7261063d3e8e34"}
 ::
 The `framing` event is called when there was activity on the input to the UART
-but the `STOP` bit wasn't in the correct place. This is either because there
-was noise on the line, or the line has been pulled to 0 for a long period
-of time.
+but the `STOP` bit wasn't in the correct place. This is either because there was
+noise on the line, or the line has been pulled to 0 for a long period of time.
 
-To enable this, you must initialise Serial with `SerialX.setup(..., { ..., errors:true });`
+To enable this, you must initialise Serial with `SerialX.setup(..., { ...,
+errors:true });`
 
 > **Note:** Even though there was an error, the byte will still be received and
 passed to the `data` handler.
@@ -46,12 +48,13 @@ passed to the `data` handler.
 
 ### Serial.on("parity",listener)
 
-::i-chinese{sha="9a7ffd30cc50818ca5abb29700b33641a55c47ef2dcf7d74663e9068e09e6bca"}
+::i-chinese{sha="43f7325e828f5a095ef911aaf84da5d77502fda5d0e30a78cae000d296fd3b34"}
 ::
-The `parity` event is called when the UART was configured with a parity bit,
-and this doesn't match the bits that have actually been received.
+The `parity` event is called when the UART was configured with a parity bit, and
+this doesn't match the bits that have actually been received.
 
-To enable this, you must initialise Serial with `SerialX.setup(..., { ..., errors:true });`
+To enable this, you must initialise Serial with `SerialX.setup(..., { ...,
+errors:true });`
 
 > **Note:** Even though there was an error, the byte will still be received and
 passed to the `data` handler.
@@ -62,13 +65,14 @@ passed to the `data` handler.
 
 ### Serial.prototype.available()
 
-::i-chinese{sha="f0d182e942442333d4a7364e0c11ae0dfeafc35c1c5b8a9e01b23bb081335595"}
+::i-chinese{sha="a4579e09bc7ffbb7cefa71c72bfbd9eb14d20a8366dfca70377b249edb03afad"}
 ::
-Return how many bytes are available to read. If there is already a listener for data, this will always return 0.
+Return how many bytes are available to read. If there is already a listener for
+data, this will always return 0.
 
 ### Serial.prototype.inject(data)
 
-::i-chinese{sha="eeb0dc9a8c4b7a7a3cd6d776e2ed179443dfe83a134f527d59d122b5bc0e4831"}
+::i-chinese{sha="08d0ba01b748a976eb7d0250891e451eac87b9817023e8b5a478836a1681b82f"}
 ::
 Add data to this device as if it came directly from the input - it will be
 returned via `serial.on('data', ...)`;
@@ -79,8 +83,8 @@ Serial1.inject('Hello World');
 // prints "Got Hel","Got lo World" (characters can be split over multiple callbacks)
 ```
 
-This is most useful if you wish to send characters to Espruino's
-REPL (console) while it is on another device.
+This is most useful if you wish to send characters to Espruino's REPL (console)
+while it is on another device.
 
 ### Serial.prototype.pipe(destination,options)
 
@@ -112,22 +116,22 @@ Return a string containing characters that have been received
 
 ### Serial.prototype.setConsole(force)
 
-::i-chinese{sha="9034b80d58b5fc6232654df3655ce1283c05af864a4614146b55ff5e49bcb7cd"}
+::i-chinese{sha="aabf245ce1b09a88b12b88f8b0ec3022b9fe7857a67dcc95bb4c0cb5c90f1ede"}
 ::
 Set this Serial port as the port for the JavaScript console (REPL).
 
-Unless `force` is set to true, changes in the connection state of the board
-(for instance plugging in USB) will cause the console to change.
+Unless `force` is set to true, changes in the connection state of the board (for
+instance plugging in USB) will cause the console to change.
 
 See `E.setConsole` for a more flexible version of this function.
 
 ### Serial.prototype.setup(baudrate,options)
 
-::i-chinese{sha="d1d14b1c1fff63fac267eae626b92e45a40b8e21d8932d06ded6853f0ec71b12"}
+::i-chinese{sha="1deda929d82a17ae36431592f5c8e60a7b58741d8ffaf31734b7e0eea8c333d6"}
 ::
 Setup this Serial port with the given baud rate and options.
 
-eg.
+e.g.
 
 ```javascript
 Serial1.setup(9600,{rx:a_pin, tx:a_pin});
@@ -155,24 +159,24 @@ If not specified in options, the default pins are used for rx and tx
 (usually the lowest numbered pins on the lowest port that supports 
 this peripheral). `ck` and `cts` are not used unless specified.
 
-Note that even after changing the RX and TX pins, if you have called setup 
+Note that even after changing the RX and TX pins, if you have called setup
 before then the previous RX and TX pins will still be connected to the Serial
 port as well - until you set them to something else using `digitalWrite` or
 `pinMode`.
 
-Flow control can be xOn/xOff (`flow:'xon'`) or hardware flow control
-(receive only) if `cts` is specified. If `cts` is set to a pin, the
-pin's value will be 0 when Espruino is ready for data and 1 when it isn't.
+Flow control can be xOn/xOff (`flow:'xon'`) or hardware flow control (receive
+only) if `cts` is specified. If `cts` is set to a pin, the pin's value will be 0
+when Espruino is ready for data and 1 when it isn't.
 
 By default, framing or parity errors don't create `framing` or `parity` events
-on the `Serial` object because storing these errors uses up additional
-storage in the queue. If you're intending to receive a lot of malformed
-data then the queue might overflow `E.getErrorFlags()` would return `FIFO_FULL`.
-However if you need to respond to `framing` or `parity` errors then 
-you'll need to use `errors:true` when initialising serial.
+on the `Serial` object because storing these errors uses up additional storage
+in the queue. If you're intending to receive a lot of malformed data then the
+queue might overflow `E.getErrorFlags()` would return `FIFO_FULL`. However if
+you need to respond to `framing` or `parity` errors then you'll need to use
+`errors:true` when initialising serial.
 
-On Linux builds there is no default Serial device, so you must specify
-a path to a device - for instance: `Serial1.setup(9600,{path:"/dev/ttyACM0"})`
+On Linux builds there is no default Serial device, so you must specify a path to
+a device - for instance: `Serial1.setup(9600,{path:"/dev/ttyACM0"})`
 
 You can also set up 'software serial' using code like:
 
@@ -181,19 +185,21 @@ var s = new Serial();
 s.setup(9600,{rx:a_pin, tx:a_pin});
 ```
 
-However software serial doesn't use `ck`, `cts`, `parity`, `flow` or `errors` parts of the initialisation object.
+However software serial doesn't use `ck`, `cts`, `parity`, `flow` or `errors`
+parts of the initialisation object.
 
 ### Serial.prototype.unsetup()
 
-::i-chinese{sha="f6849ca8bce30d7d6d5cdf34dd3b2a8b8346cef14648db75d904791111634c66"}
+::i-chinese{sha="641d69adafe7bdf1c01b12356380bcde6d34a794141cceb26c9b1d8102f4d9ae"}
 ::
-If the serial (or software serial) device was set up,
-uninitialise it.
+If the serial (or software serial) device was set up, uninitialise it.
 
 ### Serial.prototype.write(data)
 
-::i-chinese{sha="435af4c47e5d873e676d291675051c15b5b9924f9cb6e0760c330dcdf02e9674"}
+::i-chinese{sha="36322619b678f3345ad71200fc2dcb7982d443a96a333438e096a0b3ebd5f355"}
 ::
 Write a character or array of data to the serial port
 
-This method writes unmodified data, eg `Serial.write([1,2,3])` is equivalent to `Serial.write("\1\2\3")`. If you'd like data converted to a string first, use `Serial.print`.
+This method writes unmodified data, e.g. `Serial.write([1,2,3])` is equivalent to
+`Serial.write("\1\2\3")`. If you'd like data converted to a string first, use
+`Serial.print`.

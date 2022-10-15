@@ -26,33 +26,44 @@ May return `undefined` if no device can be found.
 
 ### SPI.prototype.send(data,nss_pin)
 
-::i-chinese{sha="1dc50d20b1c63aa27dc26faa6d4dbeecb67ee09b9efa71ce62ca79e98eb8763c"}
+::i-chinese{sha="516ce174d388ba7e52ca7fced78bb3df821e82012ad92bb0004e3414d03406d6"}
 ::
-Send data down SPI, and return the result. Sending an integer will return an integer, a String will return a String, and anything else will return a Uint8Array.
+Send data down SPI, and return the result. Sending an integer will return an
+integer, a String will return a String, and anything else will return a
+Uint8Array.
 
-Sending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.
+Sending multiple bytes in one call to send is preferable as they can then be
+transmitted end to end. Using multiple calls to send() will result in
+significantly slower transmission speeds.
 
-For maximum speeds, please pass either Strings or Typed Arrays as arguments. Note that you can even pass arrays of arrays, like `[1,[2,3,4],5]`
+For maximum speeds, please pass either Strings or Typed Arrays as arguments.
+Note that you can even pass arrays of arrays, like `[1,[2,3,4],5]`
 
 ### SPI.prototype.send4bit(data,bit0,bit1,nss_pin)
 
-::i-chinese{sha="7ae41fe030aff589e0204094243522ac93f593a9610ec31c0334b5a3ffb78378"}
+::i-chinese{sha="94f014a655431411a541121450183c53b4cb1a35cbc2214ecb2e1e14e79346e1"}
 ::
-Send data down SPI, using 4 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols
+Send data down SPI, using 4 bits for each 'real' bit (MSB first). This can be
+useful for faking one-wire style protocols
 
-Sending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.
+Sending multiple bytes in one call to send is preferable as they can then be
+transmitted end to end. Using multiple calls to send() will result in
+significantly slower transmission speeds.
 
 ### SPI.prototype.send8bit(data,bit0,bit1,nss_pin)
 
-::i-chinese{sha="b213cff222d8b4dba7419cce84d5fd264da8dca65c01f0fcb161bde06b73b6f2"}
+::i-chinese{sha="129d4c6ac1b702c2c72c33e12cf8b95d48a81fcf55c4b24ee5443ebe2263c39d"}
 ::
-Send data down SPI, using 8 bits for each 'real' bit (MSB first). This can be useful for faking one-wire style protocols
+Send data down SPI, using 8 bits for each 'real' bit (MSB first). This can be
+useful for faking one-wire style protocols
 
-Sending multiple bytes in one call to send is preferable as they can then be transmitted end to end. Using multiple calls to send() will result in significantly slower transmission speeds.
+Sending multiple bytes in one call to send is preferable as they can then be
+transmitted end to end. Using multiple calls to send() will result in
+significantly slower transmission speeds.
 
 ### SPI.prototype.setup(options)
 
-::i-chinese{sha="dbb09875f7a776a08eda8dfafca046fa3350210c6187274f1e994ddaf392460a"}
+::i-chinese{sha="30b0a244b1339c961dd1d7174881a9e1eb50dceb3a554d69300f4b8205462140"}
 ::
 Set up this SPI port as an SPI Master.
 
@@ -70,13 +81,17 @@ var option = {
 }
 ```
 
-If `sck`,`miso` and `mosi` are left out, they will automatically be chosen. However if one or more is specified then the unspecified pins will not be set up.
+If `sck`,`miso` and `mosi` are left out, they will automatically be chosen.
+However if one or more is specified then the unspecified pins will not be set
+up.
 
 Some boards such as those based on `nRF52` chips can have SPI on any pins, so don't have specific markings.
 
 The SPI `mode` is between 0 and 3 - see [SPI Bus](http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Clock_polarity_and_phase)
 
-On STM32F1-based parts, you cannot mix AF and non-AF pins (SPI pins are usually grouped on the chip - and you can't mix pins from two groups). Espruino will not warn you about this.
+On STM32F1-based parts, you cannot mix AF and non-AF pins (SPI pins are usually
+grouped on the chip - and you can't mix pins from two groups). Espruino will not
+warn you about this.
 
 ### SPI.prototype.write(data)
 
