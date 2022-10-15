@@ -3,7 +3,7 @@ FROM node:16-alpine as builder
 WORKDIR /node/src
 
 COPY . .
-RUN yarn install && yarn run beanio-outer && yarn run build
+RUN yarn install --registry https://registry.npm.taobao.org --verbose&& yarn run beanio-outer && yarn run build
 
 FROM node:16-alpine
 
