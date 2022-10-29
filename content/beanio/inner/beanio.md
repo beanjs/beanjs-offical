@@ -4,7 +4,14 @@ category: 'inner'
 tags: [module]
 ---
 
-<!--9--> 
+<!--10--> 
+
+### beanio.airkiss()
+
+::i-chinese{sha="05729ba1e94c17bde506ad8a64d4763c21bcc757abce64ea8aa5df6881fd925c"}
+::
+Enter airkiss network mode;
+> **Note:** Can only be used in chips with built-in wifi.
 
 ### beanio.on("connect",listener)
 
