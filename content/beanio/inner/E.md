@@ -29,18 +29,19 @@ maximum size of FFT possible to around 1024 items on most platforms.
 > **Note:** on the Original Espruino board, FFTs are performed in 64bit arithmetic as there isn't
 space to include the 32 bit maths routines (2x more RAM is required).
 
-### E.HSBtoRGB(hue,sat,bri,asArray)
+### E.HSBtoRGB(hue,sat,bri,format)
 
-::i-chinese{sha="b02ff896695e0b5067ed41c5891fee8b4bc124c2df49efa49ea7a18d3da8c1cc"}
+::i-chinese{sha="e470df0412ade9803bf77af9b5ff348e500e175a49061be6aca007b90b845006"}
 ::
 Convert hue, saturation and brightness to red, green and blue (packed into an
 integer if `asArray==false` or an array if `asArray==true`).
 
 This replaces `Graphics.setColorHSB` and `Graphics.setBgColorHSB`. On devices
-with 24 bit colour it can be used as: `Graphics.setColor(E.HSBtoRGB(h, s, b))`
+with 24 bit colour it can be used as: `Graphics.setColor(E.HSBtoRGB(h, s, b))`,
+or on devices with 26 bit colour use `Graphics.setColor(E.HSBtoRGB(h, s, b, 16))`
 
 You can quickly set RGB items in an Array or Typed Array using
-`array.set(E.HSBtoRGB(h, s, b,true), offset)`, which can be useful with arrays
+`array.set(E.HSBtoRGB(h, s, b, true), offset)`, which can be useful with arrays
 used with `require("neopixel").write`.
 
 ### E.clip(x,min,max)

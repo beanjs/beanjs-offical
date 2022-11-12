@@ -8,7 +8,7 @@ tags: [object]
 
 ### process.env
 
-::i-chinese{sha="ee5a922da982156f7c950d59cc8cc98b84f2ec73aa263ee76450a15d75d89074"}
+::i-chinese{sha="3221bfbbd5314468b68d49e701a9da2d862a0d682cae7c6f298aa69c0c5e8010"}
 ::
 Returns an Object containing various pre-defined variables.
 
@@ -34,9 +34,13 @@ Returns an Object containing various pre-defined variables.
 For example, to get a list of built-in modules, you can use
 `process.env.MODULES.split(',')`
 
+> **Note:** `process.env` is not writeable - so as not to waste RAM, the contents
+are generated on demand. If you need to be able to change them, use `process.env=process.env;`
+first to ensure the values stay allocated.
+
 ### process.memory(gc)
 
-::i-chinese{sha="96708039986d5e155d7a9fb576692ade5852f77832dd2e14439504d021ad6562"}
+::i-chinese{sha="d9bf18f228f01d98529937700128517d064697e8920562815750e323820771c3"}
 ::
 Run a Garbage Collection pass, and return an object containing information on
 memory usage.
@@ -54,6 +58,8 @@ Memory units are specified in 'blocks', which are around 16 bytes each (dependin
 * `stackEndAddress` : (on ARM) the address (that can be used with peek/poke/etc)
   of the END of the stack. The stack grows down, so unless you do a lot of
   recursion the bytes above this can be used.
+* `stackFree` : (on ARM) how many bytes of free execution stack are there
+  at the point of execution.
 * `flash_start` : (on ARM) the address of the start of flash memory (usually
   `0x8000000`)
 * `flash_binary_end` : (on ARM) the address in flash memory of the end of
