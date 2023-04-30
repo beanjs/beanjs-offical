@@ -26,6 +26,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: registry.cn-shenzhen.aliyuncs.com/beanjs/beanjs-offical:latest
-
-      - name: shell
-        run: ls && env && docker images

@@ -2,7 +2,8 @@ FROM node:16-alpine as builder
 
 WORKDIR /node/src
 COPY . .
-RUN yarn install --registry https://registry.npm.taobao.org --verbose && yarn run build
+RUN yarn install && yarn cache clean 
+RUN run build
 
 FROM node:16-alpine
 
