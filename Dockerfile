@@ -3,7 +3,7 @@ FROM node:16-alpine as builder
 WORKDIR /node/src
 COPY . .
 RUN yarn install && yarn cache clean 
-RUN run build
+RUN yarn run build
 
 FROM node:16-alpine
 
