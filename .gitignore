@@ -6,10 +6,4 @@ node_modules
 .output
 .env
 dist
-
-
-content/beanio/outer
-public/beanio/modules
-
-!content/beanio/outer/.gitkeep
-!public/beanio/modules/.gitkeep
+.DS_Store
